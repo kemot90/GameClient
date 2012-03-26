@@ -1,0 +1,16 @@
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\bin\Debug\RPGClient.exe
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\bin\Debug\RPGClient.pdb
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\Interface.baml
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\Logowanie.baml
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\App.baml
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\Interface.g.cs
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\Logowanie.g.cs
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\App.g.cs
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\RPGClient_MarkupCompile.cache
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\RPGClient.g.resources
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\RPGClient.Properties.Resources.resources
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\RPGClient.exe
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\RPGClient.pdb

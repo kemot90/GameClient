@@ -1,0 +1,21 @@
+﻿<Window x:Class="RPGClient.Interface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Interface" Height="320" Width="533">
+    <Grid>
+        <StackPanel>
+            <DockPanel LastChildFill="False" VerticalAlignment="Center">
+                <Label Content="Identyfikator: " Height="28" HorizontalAlignment="Left" x:Name="useridLabel" VerticalAlignment="Top" />
+                <TextBox Height="28" HorizontalAlignment="Left" x:Name="idText" VerticalAlignment="Top" IsReadOnly="True" BorderThickness="0" />
+            </DockPanel>
+            <DockPanel LastChildFill="False" VerticalAlignment="Center">
+                <Label Content="Login: " Height="28" HorizontalAlignment="Left" x:Name="userloginLabel" VerticalAlignment="Top" />
+                <TextBox Height="28" HorizontalAlignment="Left" x:Name="loginText" VerticalAlignment="Top" IsReadOnly="True" BorderThickness="0" />
+            </DockPanel>
+            <DockPanel LastChildFill="False" VerticalAlignment="Center">
+                <Label Content="E-mail: " Height="28" HorizontalAlignment="Left" x:Name="useremailLabel" VerticalAlignment="Top" />
+                <TextBox Height="28" HorizontalAlignment="Left" x:Name="emailText" VerticalAlignment="Top" IsReadOnly="True" BorderThickness="0" />
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</Window>
