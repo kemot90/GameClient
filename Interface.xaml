@@ -4,18 +4,40 @@
         Title="Interface" Height="320" Width="533">
     <Grid>
         <StackPanel>
-            <DockPanel LastChildFill="False" VerticalAlignment="Center">
-                <Label Content="Identyfikator: " Height="28" HorizontalAlignment="Left" x:Name="useridLabel" VerticalAlignment="Top" />
-                <TextBox Height="28" HorizontalAlignment="Left" x:Name="idText" VerticalAlignment="Top" IsReadOnly="True" BorderThickness="0" />
-            </DockPanel>
-            <DockPanel LastChildFill="False" VerticalAlignment="Center">
-                <Label Content="Login: " Height="28" HorizontalAlignment="Left" x:Name="userloginLabel" VerticalAlignment="Top" />
-                <TextBox Height="28" HorizontalAlignment="Left" x:Name="loginText" VerticalAlignment="Top" IsReadOnly="True" BorderThickness="0" />
-            </DockPanel>
-            <DockPanel LastChildFill="False" VerticalAlignment="Center">
-                <Label Content="E-mail: " Height="28" HorizontalAlignment="Left" x:Name="useremailLabel" VerticalAlignment="Top" />
-                <TextBox Height="28" HorizontalAlignment="Left" x:Name="emailText" VerticalAlignment="Top" IsReadOnly="True" BorderThickness="0" />
-            </DockPanel>
+        	<StackPanel Orientation="Vertical">
+        		<DockPanel LastChildFill="False" VerticalAlignment="Center">
+        			<Label Content="Identyfikator: " Height="28" HorizontalAlignment="Left" x:Name="useridLabel" VerticalAlignment="Top" />
+        			<TextBlock Height="28" HorizontalAlignment="Left" x:Name="idText" VerticalAlignment="Top" />
+        		</DockPanel>
+        		<DockPanel LastChildFill="False" VerticalAlignment="Center">
+        			<Label Content="Login: " Height="28" HorizontalAlignment="Left" x:Name="userloginLabel" VerticalAlignment="Top" />
+        			<TextBlock Height="28" HorizontalAlignment="Left" x:Name="loginText" VerticalAlignment="Top" />
+        		</DockPanel>
+        		<DockPanel LastChildFill="False" VerticalAlignment="Center">
+        			<Label Content="E-mail: " Height="28" HorizontalAlignment="Left" x:Name="useremailLabel" VerticalAlignment="Top" />
+        			<TextBlock Height="28" HorizontalAlignment="Left" x:Name="emailText" VerticalAlignment="Top" />
+        		</DockPanel>
+        	</StackPanel>
+			<StackPanel>
+				<TabControl>
+					<TabItem Name="postacTab" TabIndex="0" IsSelected="True">
+						<TabItem.Header>
+	                        <StackPanel Orientation="Horizontal">
+	                            <Image Height="50" Width="50" />
+	                            <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Postać"/></TextBlock>
+	                        </StackPanel>
+	                    </TabItem.Header>
+					</TabItem>
+					<TabItem Name="mapaTab" TabIndex="1">
+						<TabItem.Header>
+	                        <StackPanel Orientation="Horizontal">
+	                            <Image Source="/RPGClient;component/Images/mapIcon.png" Height="50" Width="50" />
+	                            <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Mapa"/></TextBlock>
+	                        </StackPanel>
+	                    </TabItem.Header>
+					</TabItem>
+				</TabControl>
+			</StackPanel>
         </StackPanel>
     </Grid>
 </Window>

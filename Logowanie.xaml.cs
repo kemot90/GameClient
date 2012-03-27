@@ -29,8 +29,11 @@ namespace RPGClient
         //ustawienie kodera/dekodera
         private UTF8Encoding code;
 
-        //ustawienie hosta serwera obsługującego bazę
-        private string host = "localhost";
+        //ustawienie hosta serwera
+        private string host;
+
+        //ustawienie portu, na którym nasłuchuje serwer
+        private int port;
 
         //wątek sprawdzania czy udało się zalogować
         private Thread loginTh;
@@ -41,6 +44,9 @@ namespace RPGClient
         public MainWindow()
         {
             InitializeComponent();
+
+            host = Properties.Settings.Default.Host;
+            port = Properties.Settings.Default.Port;
         }
         
         //funkcja konwerująca ciąg znaków na kod MD5
@@ -65,7 +71,7 @@ namespace RPGClient
             //inicjalizacja gniazda
             try
             {
-                user = new TcpClient(host, 8001);
+                user = new TcpClient(host, port);
                 
                 //ustawienie czasu oczekiwania na odpowiedź serwera
                 user.ReceiveTimeout = 5;
