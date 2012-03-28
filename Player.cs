@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,7 @@ namespace RPGClient
         private int port;
 
         //konstruktor gracza
-        public Player(ulong _id)
+        public Player(ulong _id, TcpClient userClient)
         {
             //ustawienie identyfikatora gracza
             id = _id;
@@ -42,9 +43,14 @@ namespace RPGClient
             //inicjalizacja gniazda połączenia z serwerem
             try
             {
-                client = new TcpClient(host, port);
+                client = userClient;
                 code = new UTF8Encoding();
-                client.Client.Send(code.GetBytes(ClientCmd.GET_PLAYER_DATA + ";" + id));
+                Command request = new Command(ClientCmd.GET_PLAYER_DATA);
+                request.Add(id.ToString());
+                request.Apply();
+
+                client.Client.Send(request.Byte);
+                //client.Client.Send(code.GetBytes(ClientCmd.GET_PLAYER_DATA + ";" + id));
                 while (true)
                 {
                     if (client.Available > 0)

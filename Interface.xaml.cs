@@ -31,12 +31,11 @@ namespace RPGClient
         {
             InitializeComponent();
 
-            player = new Player(id);
+            client = userClient;
+            player = new Player(id, client);
 
             host = Properties.Settings.Default.Host;
             port = Properties.Settings.Default.Port;
-
-            client = userClient;
 
             idText.Text = player.Id.ToString();
             loginText.Text = player.Login;
@@ -49,5 +48,6 @@ namespace RPGClient
             string[] args = command.Split(';');
             return args;
         }
+
     }
 }

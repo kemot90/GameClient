@@ -15,6 +15,7 @@ using MySql.Data.MySqlClient;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Commands;
 
 namespace RPGClient
 {
@@ -63,11 +64,17 @@ namespace RPGClient
             string password = s.ToString();
             return password;
         }
+
+        //zamiana stringa cmd na akcję i ciąg argumentów
+        private string[] cmdToArgs(string command)
+        {
+            string[] args = command.Split(';');
+            return args;
+        }
         
         //logowanie do gry
         private void singin_Click(object sender, RoutedEventArgs e)
         {
-            singin.IsEnabled = false;
             //inicjalizacja gniazda
             try
             {
@@ -79,7 +86,6 @@ namespace RPGClient
             catch
             {
                 MessageBox.Show("Czas oczekiwania na połączenie minął. Nie można było połączyć się z serwerem. Sprawdź połączenia z Internetami.", "Błąd połączenia!", MessageBoxButton.OK, MessageBoxImage.Warning);
-                singin.IsEnabled = true;
                 return;
             }
 
@@ -89,19 +95,24 @@ namespace RPGClient
             //inicjalizacja bufora przechowującego dane do wysłania
             byte[] buf = new byte[4096];
 
+            Command cmd = new Command();
+            cmd.Request(ClientCmd.LOGIN);
+            cmd.Add(login.Text);
+            cmd.Add(GetMD5Hash(password.Password));
+            cmd.Apply();
+
             //wysłanie do serwera informacji o chęci zalogowania + dane logowania
-            user.Client.Send(code.GetBytes("LOGIN;" + login.Text + ";" + GetMD5Hash(password.Password)));
+            user.Client.Send(cmd.Byte);
 
             try
             {
-                //zmienna przechowująca odpowiedź serwera
                 string response;
-
                 //dopóki serwer nie odpowiada
                 while (true)
                 {
                     if (user.Available > 0)
                     {
+                        //zmienna przechowująca odpowiedź serwera
                         response = code.GetString(buf, 0, user.Client.Receive(buf));
                         break;
                     }
@@ -109,9 +120,9 @@ namespace RPGClient
                 }
 
                 //jeżeli serwer odpowie to zapisz odpowiedź do response
-                
 
-                if (Convert.ToUInt64(response) == 0)
+                string[] args = cmdToArgs(response);
+                if (Convert.ToUInt64(args[1]) == 0)
                 {
                     MessageBox.Show("[Klient] Nie udało się zalogować.");
                     user.Close();
@@ -120,13 +131,12 @@ namespace RPGClient
                 }
                 else
                 {
-                    new Interface(Convert.ToUInt64(response), user).Show();
+                    new Interface(Convert.ToUInt64(args[1]), user).Show();
                     this.Close();
                 }
             }
             catch
             {
-                singin.IsEnabled = true;
                 return;
             }
         }
