@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace Commands
 {
@@ -106,11 +108,21 @@ namespace Commands
             }
         }
 
-        //zatwierdzanie argumentów
-        public bool Apply()
+        //zatwierdzanie argumentów i wysłanie przez gniazdo podane jako arguement
+        public string Apply(Socket client, bool ExpectedResponse = false)
         {
+            //zmienne lokalne
+
+            //rozmiar paczki danych
+            int packageSize = 0;
+
+            //bufor do wczytywania danych wysłanych przez serwer
+            byte[] buf;
+
+
             if (isRequest)
             {
+                cmdString = "";
                 foreach (string arg in args)
                 {
                     cmdString += ";" + arg;
@@ -119,38 +131,38 @@ namespace Commands
 
                 cmd = code.GetBytes(cmdString);
 
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        //zatwierdzanie argumentów i wysłanie przez gniazdo podane jako arguemtn
-        public bool Apply(Socket client)
-        {
-            if (isRequest)
-            {
-                foreach (string arg in args)
-                {
-                    cmdString += ";" + arg;
-                }
-                cmdString = cmdString.Remove(0, 1);
-
-                cmd = code.GetBytes(cmdString);
                 try
                 {
+                    client.Send(BitConverter.GetBytes(cmd.Length));
                     client.Send(cmd);
-                    return true;
+                    while (ExpectedResponse)
+                    {
+                        if (client.Available > 0)
+                        {
+                            if (packageSize == 0)
+                            {
+                                buf = new byte[4];
+                                client.Receive(buf);
+                                packageSize = BitConverter.ToInt32(buf, 0);
+                            }
+                            else
+                            {
+                                buf = new byte[packageSize];
+                                return code.GetString(buf, 0, client.Receive(buf));
+                            }
+                        }
+                        Thread.Sleep(1);
+                    }
+                    return null;
                 }
                 catch
                 {
-                    return false;
+                    return null;
                 }
             }
             else
             {
-                return false;
+                return null;
             }
         }
         //czyszczenie komendy

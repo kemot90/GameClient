@@ -101,6 +101,7 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Connection.config" />
+    <Resource Include="Fonts\Ringbearer.TTF" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

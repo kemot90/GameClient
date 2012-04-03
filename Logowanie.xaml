@@ -3,13 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Logowanie" Height="255" Width="340">
     <Window.Background>
-        <ImageBrush ImageSource="/RPGClient;component/Images/loginFormBackground.png" />
+        <ImageBrush ImageSource="/RPGClient;component/Images/grunge02.jpg" />
     </Window.Background>
+    <Window.Resources>
+        <Style x:Key="CustomFont">
+            <Setter Property="TextElement.FontFamily" Value="/RPGClient;component/Fonts/#Ringbearer" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <StackPanel Margin="7" VerticalAlignment="Center">
             <DockPanel>
                 <Image Source="/RPGClient;component/Images/warriorimagemi6.png" Height="50" Width="50" />
-                <TextBlock Margin="5,5,5,5" FontFamily="Ringbearer" FontSize="28" HorizontalAlignment="Center">Medieval Knights</TextBlock>
+                <TextBlock Margin="5,5,5,5" Style="{DynamicResource CustomFont}" FontSize="28" HorizontalAlignment="Center" Foreground="White">Medieval Knights</TextBlock>
             </DockPanel>
             <DockPanel LastChildFill="False">
                 <Border Width="100" Height="30" CornerRadius="7,7,7,7" HorizontalAlignment="Center" Margin="2" Background="#BB000000">

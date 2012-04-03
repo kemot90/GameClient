@@ -47,28 +47,15 @@ namespace RPGClient
                 code = new UTF8Encoding();
                 Command request = new Command(ClientCmd.GET_PLAYER_DATA);
                 request.Add(id.ToString());
-                request.Apply();
+                
+                string[] dane = cmdToArgs(request.Apply(client.Client, true));
 
-                client.Client.Send(request.Byte);
-                //client.Client.Send(code.GetBytes(ClientCmd.GET_PLAYER_DATA + ";" + id));
-                while (true)
+                if (dane[0] == ServerCmd.PLAYER_DATA)
                 {
-                    if (client.Available > 0)
-                    {
-                        byte[] buf = new byte[4096];
-                        string[] dane;
-                        string cmd = code.GetString(buf, 0, client.Client.Receive(buf));
-                        dane = cmdToArgs(cmd);
-
-                        if (dane[0] == ServerCmd.PLAYER_DATA)
-                        {
-                            login = dane[1];
-                            password = dane[2];
-                            access = int.Parse(dane[3]);
-                            email = dane[4];
-                        }
-                        break;
-                    }
+                    login = dane[1];
+                    password = dane[2];
+                    access = int.Parse(dane[3]);
+                    email = dane[4];
                 }
             }
             catch

@@ -40,46 +40,9 @@ namespace RPGClient
             host = Properties.Settings.Default.Host;
             port = Properties.Settings.Default.Port;
 
-            idText.Text = player.Id.ToString();
-            loginText.Text = player.Login;
-            emailText.Text = player.Email;
-
-            /*
-             * Część przeznaczona do celów dydaktycznych xD
-             */
-
-            /*Command request = new Command(ClientCmd.GET_DUPA);
-            request.Add(id.ToString());
-            request.Apply(client.Client);
-
-            request.Clear();
-
-            request.Request(ClientCmd.UPDATE_DATA_BASE);
-            request.Add(id.ToString());
-            request.Add("dupy");
-            request.Add("wartosc");
-            request.Add("Dupa2");
-            request.Apply(client.Client);
-
-            if ((WaitForResponse(client)) == ServerCmd.DATA_BASE_UPDATED)
-            {
-                request.Clear();
-
-                request.Request(ClientCmd.GET_DUPA);
-                request.Add(id.ToString());
-                request.Apply(client.Client);
-            }*/
-
-            
-            /*request.Add(id.ToString());
-            request.Add("player");
-            request.Add("login;password;email");
-            request.Add("dupa;haslo;dupa@dupa.pl");
-            request.Apply(client.Client);*/
-
-            /*
-             * Koniec części dydaktycznej xD
-             */
+            idText.Text = "Identyfikator: " + player.Id.ToString();
+            loginText.Text = "Login: " + player.Login;
+            emailText.Text = "E-mail: " + player.Email;
         }
 
         //zamiana stringa cmd na akcję i ciąg argumentów
@@ -103,6 +66,13 @@ namespace RPGClient
                 }
                 Thread.Sleep(1);
             }
+        }
+
+        private void logout_Click(object sender, RoutedEventArgs e)
+        {
+            client.Client.Close();
+            new MainWindow().Show();
+            this.Close();
         }
 
     }

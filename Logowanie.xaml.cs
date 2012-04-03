@@ -93,51 +93,25 @@ namespace RPGClient
             code = new UTF8Encoding();
 
             //inicjalizacja bufora przechowującego dane do wysłania
-            byte[] buf = new byte[4096];
+            byte[] buf;
 
             Command cmd = new Command();
             cmd.Request(ClientCmd.LOGIN);
             cmd.Add(login.Text);
             cmd.Add(GetMD5Hash(password.Password));
-            cmd.Apply();
-
-            //wysłanie do serwera informacji o chęci zalogowania + dane logowania
-            user.Client.Send(cmd.Byte);
-
-            try
+            string[] args = cmdToArgs(cmd.Apply(user.Client, true));
+            
+            if (Convert.ToUInt64(args[1]) == 0)
             {
-                string response;
-                //dopóki serwer nie odpowiada
-                while (true)
-                {
-                    if (user.Available > 0)
-                    {
-                        //zmienna przechowująca odpowiedź serwera
-                        response = code.GetString(buf, 0, user.Client.Receive(buf));
-                        break;
-                    }
-                    Thread.Sleep(1);
-                }
-
-                //jeżeli serwer odpowie to zapisz odpowiedź do response
-
-                string[] args = cmdToArgs(response);
-                if (Convert.ToUInt64(args[1]) == 0)
-                {
-                    MessageBox.Show("[Klient] Nie udało się zalogować.");
-                    user.Close();
-                    singin.IsEnabled = true;
-                    return;
-                }
-                else
-                {
-                    new Interface(Convert.ToUInt64(args[1]), user).Show();
-                    this.Close();
-                }
-            }
-            catch
-            {
+                MessageBox.Show("[Klient] Nie udało się zalogować.");
+                user.Close();
+                singin.IsEnabled = true;
                 return;
+            }
+            else
+            {
+                new Interface(Convert.ToUInt64(args[1]), user).Show();
+                this.Close();
             }
         }
     }
