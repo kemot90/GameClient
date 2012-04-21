@@ -12,11 +12,13 @@ namespace Commands
     {
         public const string LOGIN = "LOGIN";
         public const string GET_PLAYER_DATA = "GET_PLAYER_DATA";
+        public const string GET_CHARACTER_DATA = "GET_CHARACTER_DATA";
         public const string UPDATE_DATA_BASE = "UPDATE_DATA_BASE";
     }
     public class ServerCmd
     {
         public const string PLAYER_DATA = "PLAYER_DATA";
+        public const string CHARACTER_DATA = "CHARACTER_DATA";
         public const string DATA_BASE_UPDATED = "DATA_BASE_UPDATED";
     }
     public class Command

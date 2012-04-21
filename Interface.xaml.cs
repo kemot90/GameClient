@@ -27,6 +27,7 @@ namespace RPGClient
         private TcpClient client;
         private UTF8Encoding code;
         private Player player;
+        private Character character;
 
         public Interface(ulong id, TcpClient userClient)
         {
@@ -36,6 +37,7 @@ namespace RPGClient
 
             client = userClient;
             player = new Player(id, client);
+            character = new Character(id, client);
 
             host = Properties.Settings.Default.Host;
             port = Properties.Settings.Default.Port;
@@ -43,6 +45,13 @@ namespace RPGClient
             idText.Text = "Identyfikator: " + player.Id.ToString();
             loginText.Text = "Login: " + player.Login;
             emailText.Text = "E-mail: " + player.Email;
+
+            characterName.Text = character.Name;
+            characterLevel.Text = "(" + character.Level + " level)";
+            characterStrength.Text = character.Strength.ToString();
+            characterStamina.Text = character.Stamina.ToString();
+            characterDexterity.Text = character.Dexterity.ToString();
+            characterLuck.Text = character.Luck.ToString();
         }
 
         //zamiana stringa cmd na akcję i ciąg argumentów
