@@ -17,18 +17,18 @@
                 <TextBlock Margin="5,5,5,5" Style="{DynamicResource CustomFont}" FontSize="28" HorizontalAlignment="Center" Foreground="White">Medieval Knights</TextBlock>
             </DockPanel>
             <DockPanel LastChildFill="False">
-                <Border Width="100" Height="30" CornerRadius="7,7,7,7" HorizontalAlignment="Center" Margin="2" Background="#BB000000">
+                <Border Width="100" Height="30" CornerRadius="7,7,7,7" HorizontalAlignment="Center" Margin="2" Background="#DD000000">
                     <Label FontSize="14" Foreground="White" HorizontalAlignment="Center" Content="Login:"/>
                 </Border>
-                <Border Height="30" Width="200" CornerRadius="7,7,7,7" Background="#BB000000" DockPanel.Dock="Right">
+                <Border Height="30" Width="200" CornerRadius="7,7,7,7" Background="#DD000000" DockPanel.Dock="Right">
                     <TextBox Style="{StaticResource noneBorder}" CaretBrush="White" x:Name="login" Margin="2" Width="200" Height="24" FontSize="14" FontWeight="Normal" IsEnabled="True" Background="Transparent" BorderBrush="Transparent" Foreground="White" />
                 </Border>
             </DockPanel>
             <DockPanel LastChildFill="False">
-                <Border Width="100" Height="30" CornerRadius="7,7,7,7" HorizontalAlignment="Center" Margin="2" Background="#BB000000">
+                <Border Width="100" Height="30" CornerRadius="7,7,7,7" HorizontalAlignment="Center" Margin="2" Background="#DD000000">
                     <Label FontSize="14" Foreground="White" HorizontalAlignment="Center" Content="Hasło:"/>
                 </Border>
-                <Border Height="30" Width="200" CornerRadius="7,7,7,7" Background="#BB000000" DockPanel.Dock="Right">
+                <Border Height="30" Width="200" CornerRadius="7,7,7,7" Background="#DD000000" DockPanel.Dock="Right">
                     <PasswordBox Style="{StaticResource noneBorder}" CaretBrush="White" x:Name="password" Margin="2" Width="200" Height="24" FontSize="14" FontWeight="Normal" IsEnabled="True" Background="Transparent" BorderBrush="Transparent" Foreground="White" />
                 </Border>
             </DockPanel>

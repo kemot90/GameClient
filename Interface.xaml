@@ -21,7 +21,7 @@
                 </StackPanel>
             </DockPanel>
 			<StackPanel>
-				<TabControl>
+                <TabControl Background="#DD000000" BorderBrush="{x:Null}">
 					<TabItem Name="postacTab" TabIndex="0" IsSelected="True">
 						<TabItem.Header>
 	                        <StackPanel Orientation="Horizontal">
