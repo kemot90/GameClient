@@ -52,6 +52,8 @@ namespace RPGClient
                 location = uint.Parse(dane[12]);
                 travelEndTime = UInt64.Parse(dane[13]);
             }
+            //przykładowa zmiana imienia postaci
+            //this.Name = "updateTest";
         }
 
         public ulong Id
@@ -112,6 +114,21 @@ namespace RPGClient
             set
             {
                 name = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character");
+                //pola name
+                command.Add("name");
+                //na wartość updateTest
+                command.Add(value);
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i poczekaj na odpowiedź
+                command.Apply(client, true);
             }
         }
 

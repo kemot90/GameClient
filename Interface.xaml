@@ -63,6 +63,10 @@
 	                            <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Mapa"/></TextBlock>
 	                        </StackPanel>
 	                    </TabItem.Header>
+                        <StackPanel>
+                            <Button Content="Button" Height="23" Name="button1" Width="75" />
+                            <Image Source="/RPGClient;component/Images/map.png" Stretch="Fill" />
+                        </StackPanel>
 					</TabItem>
 				</TabControl>
 			</StackPanel>

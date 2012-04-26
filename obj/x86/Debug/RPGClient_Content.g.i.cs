@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/str.gif")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/rpg_mapa_v0.1.png")]
 
 
