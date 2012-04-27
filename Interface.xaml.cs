@@ -52,6 +52,8 @@ namespace RPGClient
             characterStamina.Text = character.Stamina.ToString();
             characterDexterity.Text = character.Dexterity.ToString();
             characterLuck.Text = character.Luck.ToString();
+
+            headId.Text = character.Equipment.Head.ToString();
         }
 
         //zamiana stringa cmd na akcję i ciąg argumentów

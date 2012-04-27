@@ -13,12 +13,14 @@ namespace Commands
         public const string LOGIN = "LOGIN";
         public const string GET_PLAYER_DATA = "GET_PLAYER_DATA";
         public const string GET_CHARACTER_DATA = "GET_CHARACTER_DATA";
+        public const string GET_CHARACTER_EQUIPMENT = "GET_CHARACTER_EQUIPMENT";
         public const string UPDATE_DATA_BASE = "UPDATE_DATA_BASE";
     }
     public class ServerCmd
     {
         public const string PLAYER_DATA = "PLAYER_DATA";
         public const string CHARACTER_DATA = "CHARACTER_DATA";
+        public const string CHARACTER_EQUIPMENT = "CHARACTER_EQUIPMENT";
         public const string DATA_BASE_UPDATED = "DATA_BASE_UPDATED";
     }
     public class Command
@@ -111,7 +113,7 @@ namespace Commands
         }
 
         //zatwierdzanie argumentów i wysłanie przez gniazdo podane jako arguement
-        public string Apply(Socket client, bool ExpectedResponse = false)
+        public string[] Apply(Socket client, bool ExpectedResponse = false)
         {
             //zmienne lokalne
 
@@ -150,7 +152,7 @@ namespace Commands
                             else
                             {
                                 buf = new byte[packageSize];
-                                return code.GetString(buf, 0, client.Receive(buf));
+                                return CommandToArguments(code.GetString(buf, 0, client.Receive(buf)));
                             }
                         }
                         Thread.Sleep(1);
@@ -174,6 +176,12 @@ namespace Commands
             cmdString = null;
             args.Clear();
             isRequest = false;
+        }
+        //zamiana stringa cmd na żądanie i ciąg argumentów
+        private string[] CommandToArguments(string command)
+        {
+            string[] args = command.Split(';');
+            return args;
         }
     }
 }

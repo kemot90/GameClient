@@ -72,6 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Character.cs" />
+    <Compile Include="CharacterEquipment.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="Creature.cs" />
     <Compile Include="Interface.xaml.cs">

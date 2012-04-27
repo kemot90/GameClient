@@ -68,7 +68,19 @@
                             <Image Source="/RPGClient;component/Images/map.png" Stretch="Fill" />
                         </StackPanel>
 					</TabItem>
-				</TabControl>
+                    <TabItem Name="equipmentTab" TabIndex="1">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/RPGClient;component/Images/mapIcon.png" Height="50" Width="50" />
+                                <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Ekwipunek"/></TextBlock>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <StackPanel>
+                            <TextBlock>Głowa: </TextBlock>
+                            <TextBlock x:Name="headId" />
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
 			</StackPanel>
         </StackPanel>
     </Grid>

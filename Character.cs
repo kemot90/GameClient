@@ -22,6 +22,7 @@ namespace RPGClient
         private ulong damage;
         private ulong travelEndTime;
         private string status;
+        private CharacterEquipment equip;
 
         private Socket client;
 
@@ -33,7 +34,7 @@ namespace RPGClient
             Command command = new Command();
             command.Request(ClientCmd.GET_CHARACTER_DATA);
             command.Add(id.ToString());
-            string[] dane = CommandToArguments(command.Apply(client, true));
+            string[] dane = command.Apply(client, true);
 
             if (dane[0] == ServerCmd.CHARACTER_DATA)
             {
@@ -52,6 +53,7 @@ namespace RPGClient
                 location = uint.Parse(dane[12]);
                 travelEndTime = UInt64.Parse(dane[13]);
             }
+            equip = new CharacterEquipment(id, clientTcp);
             //przykładowa zmiana imienia postaci
             //this.Name = "updateTest";
         }
@@ -78,6 +80,21 @@ namespace RPGClient
             set
             {
                 dexterity = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character");
+                //pola name
+                command.Add("dexterity");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -90,6 +107,21 @@ namespace RPGClient
             set
             {
                 level = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character");
+                //pola name
+                command.Add("level");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -102,6 +134,21 @@ namespace RPGClient
             set
             {
                 luck = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character");
+                //pola name
+                command.Add("luck");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -127,8 +174,8 @@ namespace RPGClient
                 command.Add("id");
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
-                //uaktualnij i poczekaj na odpowiedź
-                command.Apply(client, true);
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -141,6 +188,21 @@ namespace RPGClient
             set
             {
                 stamina = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character");
+                //pola name
+                command.Add("stamina");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -153,6 +215,21 @@ namespace RPGClient
             set
             {
                 strength = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character");
+                //pola name
+                command.Add("strength");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -165,6 +242,21 @@ namespace RPGClient
             set
             {
                 exp = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character");
+                //pola name
+                command.Add("exp");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -177,94 +269,21 @@ namespace RPGClient
             set
             {
                 gold = value;
-            }
-        }
-
-        public int Head
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public int Shoulders
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public int Chest
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public int Hands
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public int Thighs
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public int Legs
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public int Weapon
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public int Shield
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character");
+                //pola name
+                command.Add("gold");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -277,6 +296,21 @@ namespace RPGClient
             set
             {
                 status = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character_status");
+                //pola name
+                command.Add("status");
+                //na wartość updateTest
+                command.Add(value);
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -289,6 +323,21 @@ namespace RPGClient
             set
             {
                 lastDamage = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character_status");
+                //pola name
+                command.Add("lastDamage");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -301,6 +350,21 @@ namespace RPGClient
             set
             {
                 damage = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character_status");
+                //pola name
+                command.Add("damage");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -313,6 +377,21 @@ namespace RPGClient
             set
             {
                 location = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character_status");
+                //pola name
+                command.Add("location");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
             }
         }
 
@@ -325,6 +404,29 @@ namespace RPGClient
             set
             {
                 travelEndTime = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character_status");
+                //pola name
+                command.Add("travelEndTime");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
+            }
+        }
+
+        public CharacterEquipment Equipment
+        {
+            get
+            {
+                return equip;
             }
         }
 

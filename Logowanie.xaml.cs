@@ -99,7 +99,7 @@ namespace RPGClient
             cmd.Request(ClientCmd.LOGIN);
             cmd.Add(login.Text);
             cmd.Add(GetMD5Hash(password.Password));
-            string[] args = cmdToArgs(cmd.Apply(user.Client, true));
+            string[] args = cmd.Apply(user.Client, true);
             
             if (Convert.ToUInt64(args[1]) == 0)
             {
