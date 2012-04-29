@@ -58,6 +58,8 @@ namespace RPGClient
             characterDexterityBonus.Text = "0";
             characterLuckBonus.Text = "0";
 
+            switchIncreaseButtons();
+
             remainingPoints.Text = "Pozostałe ("+character.RemainingPoints()+"): ";
 
             headId.Text = character.Equipment.Head.ToString();
@@ -99,6 +101,8 @@ namespace RPGClient
                 case "luck":
                     character.Luck++;
                     characterLuck.Text = character.Luck.ToString();
+                    break;
+                default:
                     break;
             }
             remainingPoints.Text = "Pozostałe (" + character.RemainingPoints() + "): ";

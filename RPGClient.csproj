@@ -133,6 +133,24 @@
   <ItemGroup>
     <Resource Include="Images\map.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\castle_icon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\castle_icon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cave_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\castle_icon3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cave_icon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\equipIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

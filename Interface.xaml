@@ -4,102 +4,128 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         AllowsTransparency="True"
-        Title="Interface" Height="320" Width="533" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+        Title="Interface" Height="900" Width="1366" WindowState="Maximized" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush Stretch="None" Viewport="512,512,512,512" ViewportUnits="Absolute" TileMode="Tile" ImageSource="/RPGClient;component/Images/grunge02.jpg" />
     </Window.Background>
     <Grid>
-        <StackPanel>
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left">
-                    <TextBlock Text="Identyfikator" HorizontalAlignment="Left" x:Name="idText" VerticalAlignment="Top" Foreground="White" />
-                    <TextBlock Text="Login" HorizontalAlignment="Left" x:Name="loginText" VerticalAlignment="Top" Foreground="White" />
-                    <TextBlock Text="E-mail" HorizontalAlignment="Left" x:Name="emailText" VerticalAlignment="Top" Foreground="White" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+            <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left">
+                <TextBlock Text="Identyfikator" HorizontalAlignment="Left" x:Name="idText" VerticalAlignment="Top" Foreground="White" />
+                <TextBlock Text="Login" HorizontalAlignment="Left" x:Name="loginText" VerticalAlignment="Top" Foreground="White" />
+                <TextBlock Text="E-mail" HorizontalAlignment="Left" x:Name="emailText" VerticalAlignment="Top" Foreground="White" />
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
+                <Button Content="Wyloguj" Height="23" Name="logout" Width="75" Click="logout_Click" />
+            </StackPanel>
+        </DockPanel>
+        <TabControl Background="#DD000000" BorderBrush="{x:Null}" Grid.Row="1">
+			<TabItem Name="postacTab" TabIndex="0" IsSelected="True">
+				<TabItem.Header>
+	                <StackPanel Orientation="Horizontal">
+	                    <Image Height="50" Width="50" />
+	                    <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Postać"/></TextBlock>
+	                </StackPanel>
+	            </TabItem.Header>
+                <StackPanel HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="characterName" />
+                        <TextBlock x:Name="characterLevel" />
+                    </StackPanel>
+                    <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Margin="26,0,0,0" Foreground="DarkOrange">Cecha:</TextBlock>
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" Width="50" Foreground="DarkOrange">Baza:</TextBlock>
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" Width="50" Foreground="DarkOrange">Bonus:</TextBlock>
+                        <TextBlock TextAlignment="Right" Width="80" x:Name="remainingPoints" Foreground="DarkOrange" />
+                    </WrapPanel>
+                    <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
+                        <Image Source="/RPGClient;component/Images/str.gif" Width="26" Height="25" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Siła: </TextBlock>
+                        <TextBlock Text="{Binding ElementName=character.Strength}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStrength" Width="50" />
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStrengthBonus" Width="50" />
+                        <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="streangthSum" Width="60" />
+                        <Button Width="20" Height="20" Tag="strength" Content="+" Click="IncreaseFeature" x:Name="incStr" />
+                    </WrapPanel>
+                    <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
+                        <Image Source="/RPGClient;component/Images/stam.gif" Width="26" Height="25" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Wytrzymałość:</TextBlock>
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStamina" Width="50" />
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStaminaBonus" Width="50" />
+                        <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="staminaSum" Width="60" />
+                        <Button Width="20" Height="20" Tag="stamina" Content="+" Click="IncreaseFeature" x:Name="incStam" />
+                    </WrapPanel>
+                    <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
+                        <Image Source="/RPGClient;component/Images/dex.gif" Width="26" Height="25" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Zręczność:</TextBlock>
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterDexterity" Width="50" />
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterDexterityBonus" Width="50" />
+                        <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="dexteritySum" Width="60" />
+                        <Button Width="20" Height="20" Tag="dexterity" Content="+" Click="IncreaseFeature" x:Name="incDex" />
+                    </WrapPanel>
+                    <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
+                        <Image Source="/RPGClient;component/Images/luck.gif" Width="26" Height="25" />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Szczęście:</TextBlock>
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterLuck" Width="50" />
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterLuckBonus" Width="50" />
+                        <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="luckSum" Width="60" />
+                        <Button Width="20" Height="20" Tag="luck" Content="+" Click="IncreaseFeature" x:Name="incLuck" />
+                    </WrapPanel>
                 </StackPanel>
-                <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
-                    <Button Content="Wyloguj" Height="23" Name="logout" Width="75" Click="logout_Click" />
+			</TabItem>
+            <TabItem Name="mapaTab" TabIndex="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+				<TabItem.Header>
+	                <StackPanel Orientation="Horizontal">
+	                    <Image Source="/RPGClient;component/Images/mapIcon.png" Height="50" Width="50" />
+	                    <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Mapa"/></TextBlock>
+	                </StackPanel>
+	            </TabItem.Header>
+                <ScrollViewer>
+                    <Canvas Height="873">
+                        <Button Canvas.ZIndex="1" Height="75" Name="cityBtn1" Width="50" Canvas.Left="164" Canvas.Top="380">
+                            <Button.Content>
+                                <StackPanel Width="40" Height="75">
+                                    <Image Source="/RPGClient;component/Images/castle_icon1.png" />
+                                    <TextBlock TextAlignment="Center">Rheis</TextBlock>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button Canvas.ZIndex="1" Height="30" Name="caveBtn1" Width="30" Canvas.Left="198" Canvas.Top="480">
+                            <Image Source="/RPGClient;component/Images/cave_icon1.png" />
+                        </Button>
+                        <Button Canvas.ZIndex="1" Height="30" Name="caveBtn2" Width="30" Canvas.Left="220" Canvas.Top="385">
+                            <Image Source="/RPGClient;component/Images/cave_icon1.png" />
+                        </Button>
+                        <Button Canvas.ZIndex="1" Height="30" Name="caveBtn3" Width="30" Canvas.Left="295" Canvas.Top="435">
+                            <Image Source="/RPGClient;component/Images/cave_icon1.png" />
+                        </Button>
+                        <Button Canvas.ZIndex="1" Height="73" Name="cityBtn2" Width="50" Canvas.Left="287" Canvas.Top="603">
+                            <Button.Content>
+                                <StackPanel Width="50" Height="73">
+                                    <Image Source="/RPGClient;component/Images/castle_icon2.png" />
+                                    <TextBlock TextAlignment="Center">Heltald</TextBlock>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Image Canvas.Left="0" Canvas.Top="0" Canvas.ZIndex="0" Source="/RPGClient;component/Images/map.png" Width="1280" Height="873" />
+                    </Canvas>
+                </ScrollViewer>
+			</TabItem>
+            <TabItem Name="equipmentTab" TabIndex="1">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/RPGClient;component/Images/equipIcon.png" Height="50" Width="47" />
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Ekwipunek"/></TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <StackPanel>
+                    <TextBlock>Głowa: </TextBlock>
+                    <TextBlock x:Name="headId" />
                 </StackPanel>
-            </DockPanel>
-			<StackPanel>
-                <TabControl Background="#DD000000" BorderBrush="{x:Null}">
-					<TabItem Name="postacTab" TabIndex="0" IsSelected="True">
-						<TabItem.Header>
-	                        <StackPanel Orientation="Horizontal">
-	                            <Image Height="50" Width="50" />
-	                            <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Postać"/></TextBlock>
-	                        </StackPanel>
-	                    </TabItem.Header>
-                        <StackPanel HorizontalAlignment="Left">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock x:Name="characterName" />
-                                <TextBlock x:Name="characterLevel" />
-                            </StackPanel>
-                            <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
-                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Margin="26,0,0,0" Foreground="DarkOrange">Cecha:</TextBlock>
-                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" Width="50" Foreground="DarkOrange">Baza:</TextBlock>
-                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" Width="50" Foreground="DarkOrange">Bonus:</TextBlock>
-                                <TextBlock TextAlignment="Right" Width="80" x:Name="remainingPoints" Foreground="DarkOrange" />
-                            </WrapPanel>
-                            <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
-                                <Image Source="/RPGClient;component/Images/str.gif" Width="26" Height="25" />
-                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Siła: </TextBlock>
-                                <TextBlock Text="{Binding ElementName=character.Strength}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStrength" Width="50" />
-                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStrengthBonus" Width="50" />
-                                <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="streangthSum" Width="60" />
-                                <Button Width="20" Height="20" Tag="strength" Content="+" Click="IncreaseFeature" x:Name="incStr" />
-                            </WrapPanel>
-                            <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
-                                <Image Source="/RPGClient;component/Images/stam.gif" Width="26" Height="25" />
-                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Wytrzymałość:</TextBlock>
-                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStamina" Width="50" />
-                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStaminaBonus" Width="50" />
-                                <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="staminaSum" Width="60" />
-                                <Button Width="20" Height="20" Tag="stamina" Content="+" Click="IncreaseFeature" x:Name="incStam" />
-                            </WrapPanel>
-                            <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
-                                <Image Source="/RPGClient;component/Images/dex.gif" Width="26" Height="25" />
-                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Zręczność:</TextBlock>
-                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterDexterity" Width="50" />
-                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterDexterityBonus" Width="50" />
-                                <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="dexteritySum" Width="60" />
-                                <Button Width="20" Height="20" Tag="dexterity" Content="+" Click="IncreaseFeature" x:Name="incDex" />
-                            </WrapPanel>
-                            <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
-                                <Image Source="/RPGClient;component/Images/luck.gif" Width="26" Height="25" />
-                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Szczęście:</TextBlock>
-                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterLuck" Width="50" />
-                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterLuckBonus" Width="50" />
-                                <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="luckSum" Width="60" />
-                                <Button Width="20" Height="20" Tag="luck" Content="+" Click="IncreaseFeature" x:Name="incLuck" />
-                            </WrapPanel>
-                        </StackPanel>
-					</TabItem>
-					<TabItem Name="mapaTab" TabIndex="1">
-						<TabItem.Header>
-	                        <StackPanel Orientation="Horizontal">
-	                            <Image Source="/RPGClient;component/Images/mapIcon.png" Height="50" Width="50" />
-	                            <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Mapa"/></TextBlock>
-	                        </StackPanel>
-	                    </TabItem.Header>
-                        <StackPanel>
-                            <Button Content="Button" Height="23" Name="button1" Width="75" />
-                            <Image Source="/RPGClient;component/Images/map.png" Stretch="Fill" />
-                        </StackPanel>
-					</TabItem>
-                    <TabItem Name="equipmentTab" TabIndex="1">
-                        <TabItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="/RPGClient;component/Images/mapIcon.png" Height="50" Width="50" />
-                                <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Ekwipunek"/></TextBlock>
-                            </StackPanel>
-                        </TabItem.Header>
-                        <StackPanel>
-                            <TextBlock>Głowa: </TextBlock>
-                            <TextBlock x:Name="headId" />
-                        </StackPanel>
-                    </TabItem>
-                </TabControl>
-			</StackPanel>
-        </StackPanel>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
