@@ -53,6 +53,13 @@ namespace RPGClient
             characterDexterity.Text = character.Dexterity.ToString();
             characterLuck.Text = character.Luck.ToString();
 
+            characterStrengthBonus.Text = "0";
+            characterStaminaBonus.Text = "0";
+            characterDexterityBonus.Text = "0";
+            characterLuckBonus.Text = "0";
+
+            remainingPoints.Text = "Pozostałe ("+character.RemainingPoints()+"): ";
+
             headId.Text = character.Equipment.Head.ToString();
         }
 
@@ -63,27 +70,51 @@ namespace RPGClient
             return args;
         }
 
-        private string WaitForResponse(TcpClient client)
-        {
-            string[] args;
-            while (true)
-            {
-                if (client.Available > 0)
-                {
-                    byte[] buf = new byte[4096];
-                    string response = code.GetString(buf, 0, client.Client.Receive(buf));
-                    args = cmdToArgs(response);
-                    return args[0];
-                }
-                Thread.Sleep(1);
-            }
-        }
-
         private void logout_Click(object sender, RoutedEventArgs e)
         {
             client.Client.Close();
             new MainWindow().Show();
             this.Close();
+        }
+
+        private void IncreaseFeature(object sender, RoutedEventArgs e)
+        {
+            Button clickedBtn = sender as Button;
+            string feature = clickedBtn.Tag.ToString();
+
+            switch (feature)
+            {
+                case "strength":
+                    character.Strength++;
+                    characterStrength.Text = character.Strength.ToString();
+                    break;
+                case "stamina":
+                    character.Stamina++;
+                    characterStamina.Text = character.Stamina.ToString();
+                    break;
+                case "dexterity":
+                    character.Dexterity++;
+                    characterDexterity.Text = character.Dexterity.ToString();
+                    break;
+                case "luck":
+                    character.Luck++;
+                    characterLuck.Text = character.Luck.ToString();
+                    break;
+            }
+            remainingPoints.Text = "Pozostałe (" + character.RemainingPoints() + "): ";
+            switchIncreaseButtons();
+        }
+
+        private void switchIncreaseButtons()
+        {
+            if (character.RemainingPoints() < 1)
+            {
+                incDex.IsEnabled = incLuck.IsEnabled = incStam.IsEnabled = incStr.IsEnabled = false;
+            }
+            else
+            {
+                incDex.IsEnabled = incLuck.IsEnabled = incStam.IsEnabled = incStr.IsEnabled = true;
+            }
         }
 
     }

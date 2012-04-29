@@ -58,6 +58,12 @@ namespace RPGClient
             //this.Name = "updateTest";
         }
 
+        //obliczanie pozostałej liczby punktów do rozdania
+        public int RemainingPoints()
+        {
+            return (int)(4 + (this.Level * 4) - (this.Strength + this.Stamina + this.Dexterity + this.Luck));
+        }
+
         public ulong Id
         {
             get

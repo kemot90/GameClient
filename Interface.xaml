@@ -34,26 +34,44 @@
                                 <TextBlock x:Name="characterName" />
                                 <TextBlock x:Name="characterLevel" />
                             </StackPanel>
-                            <DockPanel Width="150" VerticalAlignment="Center" Margin="0,0,0,5">
+                            <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Margin="26,0,0,0" Foreground="DarkOrange">Cecha:</TextBlock>
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" Width="50" Foreground="DarkOrange">Baza:</TextBlock>
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" Width="50" Foreground="DarkOrange">Bonus:</TextBlock>
+                                <TextBlock TextAlignment="Right" Width="80" x:Name="remainingPoints" Foreground="DarkOrange" />
+                            </WrapPanel>
+                            <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
                                 <Image Source="/RPGClient;component/Images/str.gif" Width="26" Height="25" />
-                                <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Center">Siła: </TextBlock>
-                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="characterStrength" />
-                            </DockPanel>
-                            <DockPanel Width="150" VerticalAlignment="Center" Margin="0,0,0,5">
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Siła: </TextBlock>
+                                <TextBlock Text="{Binding ElementName=character.Strength}" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStrength" Width="50" />
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStrengthBonus" Width="50" />
+                                <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="streangthSum" Width="60" />
+                                <Button Width="20" Height="20" Tag="strength" Content="+" Click="IncreaseFeature" x:Name="incStr" />
+                            </WrapPanel>
+                            <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
                                 <Image Source="/RPGClient;component/Images/stam.gif" Width="26" Height="25" />
-                                <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Center">Wytrzymałość:</TextBlock>
-                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="characterStamina" />
-                            </DockPanel>
-                            <DockPanel Width="150" VerticalAlignment="Center" Margin="0,0,0,5">
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Wytrzymałość:</TextBlock>
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStamina" Width="50" />
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterStaminaBonus" Width="50" />
+                                <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="staminaSum" Width="60" />
+                                <Button Width="20" Height="20" Tag="stamina" Content="+" Click="IncreaseFeature" x:Name="incStam" />
+                            </WrapPanel>
+                            <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
                                 <Image Source="/RPGClient;component/Images/dex.gif" Width="26" Height="25" />
-                                <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Center">Zręczność:</TextBlock>
-                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="characterDexterity" />
-                            </DockPanel>
-                            <DockPanel Width="150" VerticalAlignment="Center" Margin="0,0,0,5">
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Zręczność:</TextBlock>
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterDexterity" Width="50" />
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterDexterityBonus" Width="50" />
+                                <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="dexteritySum" Width="60" />
+                                <Button Width="20" Height="20" Tag="dexterity" Content="+" Click="IncreaseFeature" x:Name="incDex" />
+                            </WrapPanel>
+                            <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
                                 <Image Source="/RPGClient;component/Images/luck.gif" Width="26" Height="25" />
-                                <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Center">Szczęście:</TextBlock>
-                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" x:Name="characterLuck" />
-                            </DockPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Szczęście:</TextBlock>
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterLuck" Width="50" />
+                                <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="characterLuckBonus" Width="50" />
+                                <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="luckSum" Width="60" />
+                                <Button Width="20" Height="20" Tag="luck" Content="+" Click="IncreaseFeature" x:Name="incLuck" />
+                            </WrapPanel>
                         </StackPanel>
 					</TabItem>
 					<TabItem Name="mapaTab" TabIndex="1">
