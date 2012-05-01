@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Windows.Threading;
 using Commands;
 
 namespace RPGClient
@@ -28,12 +29,16 @@ namespace RPGClient
         private UTF8Encoding code;
         private Player player;
         private Character character;
+        private long timeDifference;
 
-        public Interface(ulong id, TcpClient userClient)
+        public Interface(ulong id, TcpClient userClient, long diff)
         {
             InitializeComponent();
 
             code = new UTF8Encoding();
+
+            //MessageBox.Show(CurrentTime().ToString());
+            timeDifference = diff;
 
             client = userClient;
             player = new Player(id, client);
@@ -46,6 +51,7 @@ namespace RPGClient
             loginText.Text = "Login: " + player.Login;
             emailText.Text = "E-mail: " + player.Email;
 
+            //wypełnie informacji o postaci
             characterName.Text = character.Name;
             characterLevel.Text = "(" + character.Level + " level)";
             characterStrength.Text = character.Strength.ToString();
@@ -58,20 +64,40 @@ namespace RPGClient
             characterDexterityBonus.Text = "0";
             characterLuckBonus.Text = "0";
 
+            //zainicjalizowanie pasków stanu HP, Kondycja
+            HPStatus.Text = "HP: " + character.GetHP(CurrentTime()) + "/" + character.GetMaxHP();
+            HPBar.Width = Convert.ToInt32(Math.Round(200 * (double)character.GetHP(CurrentTime()) / (double)character.GetMaxHP(), 0));
+
             switchIncreaseButtons();
 
             remainingPoints.Text = "Pozostałe ("+character.RemainingPoints()+"): ";
 
             headId.Text = character.Equipment.Head.ToString();
+
+            DispatcherTimer backgroundTimer = new DispatcherTimer();
+            backgroundTimer.Tick += new EventHandler(TimerMethod);
+            backgroundTimer.Interval = TimeSpan.FromSeconds(1);
+            backgroundTimer.Start();
         }
 
-        //zamiana stringa cmd na akcję i ciąg argumentów
-        private string[] cmdToArgs(string command)
+        //funkcja timera, uaktuaniająca kontrolki co sekundę
+        private void TimerMethod(object sender, EventArgs e)
         {
-            string[] args = command.Split(';');
-            return args;
+            //zainicjalizowanie pasków stanu HP, Kondycja
+            HPStatus.Text = "HP: " + character.GetHP(CurrentTime()) + "/" + character.GetMaxHP();
+            HPBar.Width = Convert.ToInt32(Math.Floor(200 * (double)character.GetHP(CurrentTime()) / (double)character.GetMaxHP()));
         }
 
+        //obliczenie aktualnego czasu zsynchronizowanego z serwerem
+        private long CurrentTime()
+        {
+            //Find unix timestamp (seconds since 01/01/1970)
+            long ticks = DateTime.UtcNow.Ticks + timeDifference - DateTime.Parse("01/01/1970 00:00:00").Ticks;
+            ticks /= 10000000; //Convert windows ticks to seconds
+            return ticks;
+        }
+
+        //wylogowanie
         private void logout_Click(object sender, RoutedEventArgs e)
         {
             client.Client.Close();
@@ -79,6 +105,7 @@ namespace RPGClient
             this.Close();
         }
 
+        //zwiększenie umiejętności
         private void IncreaseFeature(object sender, RoutedEventArgs e)
         {
             Button clickedBtn = sender as Button;

@@ -151,6 +151,18 @@
   <ItemGroup>
     <Resource Include="Images\equipIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\statborder_hp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\hpstatus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\conditionstatus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\statborder_con.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

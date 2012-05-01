@@ -5,6 +5,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using Commands;
+using System.Windows;
 
 namespace RPGClient
 {
@@ -22,6 +23,7 @@ namespace RPGClient
         private ulong damage;
         private ulong travelEndTime;
         private string status;
+        private ulong pointRegenerationTime;
         private CharacterEquipment equip;
 
         private Socket client;
@@ -54,6 +56,7 @@ namespace RPGClient
                 travelEndTime = UInt64.Parse(dane[13]);
             }
             equip = new CharacterEquipment(id, clientTcp);
+            pointRegenerationTime = 30;
             //przykładowa zmiana imienia postaci
             //this.Name = "updateTest";
         }
@@ -62,6 +65,36 @@ namespace RPGClient
         public int RemainingPoints()
         {
             return (int)(4 + (this.Level * 4) - (this.Strength + this.Stamina + this.Dexterity + this.Luck));
+        }
+
+        //obliczanie maksymalnej wartości HP
+        public ulong GetMaxHP()
+        {
+            return (ulong)(0.5 * strength) + 10 * stamina;
+        }
+
+        //obliczanie aktualnie posiadanego HP
+        public ulong GetHP(long currentTime)
+        {
+            if (this.Damage != 0)
+            {
+                ulong passed = (ulong)((ulong)currentTime - lastDamage);
+                ulong currentHP = GetMaxHP() - damage + Convert.ToUInt64(Math.Floor((double)passed / (double)pointRegenerationTime));
+                if (currentHP >= GetMaxHP())
+                {
+                    this.LastDamage = 0;
+                    this.Damage = 0;
+                    return GetMaxHP();
+                }
+                else
+                {
+                    return currentHP;
+                }
+            }
+            else
+            {
+                return GetMaxHP();
+            }
         }
 
         public ulong Id

@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/equipicon.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/statborder_con.png")]
 
 

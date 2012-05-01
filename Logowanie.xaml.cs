@@ -16,6 +16,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using Commands;
+using System.Diagnostics;
 
 namespace RPGClient
 {
@@ -99,6 +100,9 @@ namespace RPGClient
             cmd.Request(ClientCmd.LOGIN);
             cmd.Add(login.Text);
             cmd.Add(GetMD5Hash(password.Password));
+
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
             string[] args = cmd.Apply(user.Client, true);
             
             if (Convert.ToUInt64(args[1]) == 0)
@@ -110,7 +114,8 @@ namespace RPGClient
             }
             else
             {
-                new Interface(Convert.ToUInt64(args[1]), user).Show();
+                watch.Stop();
+                new Interface(Convert.ToUInt64(args[1]), user, (long.Parse(args[2]) + watch.ElapsedTicks) - DateTime.UtcNow.Ticks).Show();
                 this.Close();
             }
         }
