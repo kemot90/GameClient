@@ -15,14 +15,22 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" HorizontalAlignment="Left">
-                <TextBlock Text="Identyfikator" HorizontalAlignment="Left" x:Name="idText" VerticalAlignment="Top" Foreground="White" />
-                <TextBlock Text="Login" HorizontalAlignment="Left" x:Name="loginText" VerticalAlignment="Top" Foreground="White" />
-                <TextBlock Text="E-mail" HorizontalAlignment="Left" x:Name="emailText" VerticalAlignment="Top" Foreground="White" />
+                <WrapPanel>
+                    <TextBlock x:Name="characterNameTop" Text="imie postaci" FontSize="14" FontWeight="Bold" />
+                    <TextBlock FontSize="14" FontWeight="Bold" Text=" (Lvl. "/>
+                    <TextBlock FontSize="14" FontWeight="Bold" x:Name="characterLvlTop" />
+                    <TextBlock FontSize="14" FontWeight="Bold" Text=")" />
+                </WrapPanel>
+                <WrapPanel>
+                    <Image Source="/RPGClient;component/Images/coins.png" Width="20" Height="20" Margin="0,0,5,0" />
+                    <TextBlock FontSize="14" FontWeight="Bold" x:Name="goldTop" Text="0" />
+                    <TextBlock FontSize="14" FontWeight="Bold" Text=" szt." />
+                </WrapPanel>
             </StackPanel>
             <StackPanel Grid.Column="1" HorizontalAlignment="Left">
                 <Canvas Width="218" Height="40" >
@@ -52,8 +60,11 @@
                     </StackPanel>
                 </Canvas>
             </StackPanel>
-            <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+            <StackPanel Grid.Column="2" HorizontalAlignment="Left">
                 <Button Content="Wyloguj" Height="23" Name="logout" Width="75" Click="logout_Click" />
+                <TextBlock>Zalogowany jako: </TextBlock>
+                <TextBlock Text="Identyfikacja" HorizontalAlignment="Left" x:Name="idText" VerticalAlignment="Top" Foreground="White" />
+                <TextBlock Text="TimeStamp" HorizontalAlignment="Left" x:Name="serverTimeStamp" VerticalAlignment="Top" Foreground="White" />
             </StackPanel>
         </Grid>
         <TabControl Background="#DD000000" BorderBrush="{x:Null}" Grid.Row="1">
@@ -65,11 +76,6 @@
 	                </StackPanel>
 	            </TabItem.Header>
                 <StackPanel HorizontalAlignment="Left">
-                    <TextBox Height="300" AcceptsReturn="True"></TextBox>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="characterName" />
-                        <TextBlock x:Name="characterLevel" />
-                    </StackPanel>
                     <WrapPanel VerticalAlignment="Center" Margin="0,0,0,5">
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Margin="26,0,0,0" Foreground="DarkOrange">Cecha:</TextBlock>
                         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" Width="50" Foreground="DarkOrange">Baza:</TextBlock>
@@ -158,6 +164,17 @@
                 <StackPanel>
                     <TextBlock>Głowa: </TextBlock>
                     <TextBlock x:Name="headId" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Name="fightTab" TabIndex="1">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/RPGClient;component/Images/warriorimagemi6.png" Height="50" Width="47" />
+                        <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Walka"/></TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <StackPanel>
+                    <TextBlock>Walka:</TextBlock>
                 </StackPanel>
             </TabItem>
         </TabControl>

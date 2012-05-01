@@ -21,9 +21,12 @@ namespace RPGClient
         private ulong gold;
         private ulong lastDamage;
         private ulong damage;
+        private ulong lastFatigue;
+        private ulong fatigue;
         private ulong travelEndTime;
         private string status;
-        private ulong pointRegenerationTime;
+        private uint pointRegenerationTime;
+        private uint fullRegenerationTime;
         private CharacterEquipment equip;
 
         private Socket client;
@@ -52,11 +55,15 @@ namespace RPGClient
                 status = dane[9];
                 lastDamage = UInt64.Parse(dane[10]);
                 damage = UInt64.Parse(dane[11]);
-                location = uint.Parse(dane[12]);
-                travelEndTime = UInt64.Parse(dane[13]);
+                lastFatigue = UInt64.Parse(dane[12]);
+                fatigue = UInt64.Parse(dane[13]);
+                
+                location = uint.Parse(dane[14]);
+                travelEndTime = UInt64.Parse(dane[15]);
             }
             equip = new CharacterEquipment(id, clientTcp);
             pointRegenerationTime = 30;
+            fullRegenerationTime = 15 * 60;
             //przykładowa zmiana imienia postaci
             //this.Name = "updateTest";
         }
@@ -70,7 +77,7 @@ namespace RPGClient
         //obliczanie maksymalnej wartości HP
         public ulong GetMaxHP()
         {
-            return (ulong)(0.5 * strength) + 10 * stamina;
+            return strength + (10 * stamina);
         }
 
         //obliczanie aktualnie posiadanego HP
@@ -94,6 +101,34 @@ namespace RPGClient
             else
             {
                 return GetMaxHP();
+            }
+        }
+
+        public ulong GetMaxStamina()
+        {
+            return (10 * strength) + (10 * stamina);
+        }
+
+        public ulong GetStamina(long currentTime)
+        {
+            if (this.Fatigue != 0)
+            {
+                ulong passed = (ulong)((ulong)currentTime - lastFatigue);
+                ulong currentStamina = GetMaxStamina() - fatigue + Convert.ToUInt64(Math.Floor(((double)passed * (double)GetMaxStamina()) / (double)fullRegenerationTime));
+                if (currentStamina >= GetMaxStamina())
+                {
+                    this.LastFatigue = 0;
+                    this.Fatigue = 0;
+                    return GetMaxStamina();
+                }
+                else
+                {
+                    return currentStamina;
+                }
+            }
+            else
+            {
+                return GetMaxStamina();
             }
         }
 
@@ -396,6 +431,60 @@ namespace RPGClient
                 command.Add("character_status");
                 //pola name
                 command.Add("damage");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
+            }
+        }
+
+        public ulong LastFatigue
+        {
+            get
+            {
+                return lastFatigue;
+            }
+            set
+            {
+                lastFatigue = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character_status");
+                //pola name
+                command.Add("lastFatigue");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
+            }
+        }
+
+        public ulong Fatigue
+        {
+            get
+            {
+                return fatigue;
+            }
+            set
+            {
+                fatigue = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character_status");
+                //pola name
+                command.Add("fatigue");
                 //na wartość updateTest
                 command.Add(value.ToString());
                 //gdzie wartość pola id

@@ -47,13 +47,12 @@ namespace RPGClient
             host = Properties.Settings.Default.Host;
             port = Properties.Settings.Default.Port;
 
-            idText.Text = "Identyfikator: " + player.Id.ToString();
-            loginText.Text = "Login: " + player.Login;
-            emailText.Text = "E-mail: " + player.Email;
+            idText.Text = player.Login + " (ID " + player.Id.ToString() + ")";
 
             //wypełnie informacji o postaci
-            characterName.Text = character.Name;
-            characterLevel.Text = "(" + character.Level + " level)";
+            characterNameTop.Text = character.Name;
+            characterLvlTop.Text = character.Level.ToString();
+            goldTop.Text = character.Gold.ToString();
             characterStrength.Text = character.Strength.ToString();
             characterStamina.Text = character.Stamina.ToString();
             characterDexterity.Text = character.Dexterity.ToString();
@@ -68,24 +67,35 @@ namespace RPGClient
             HPStatus.Text = "HP: " + character.GetHP(CurrentTime()) + "/" + character.GetMaxHP();
             HPBar.Width = Convert.ToInt32(Math.Round(200 * (double)character.GetHP(CurrentTime()) / (double)character.GetMaxHP(), 0));
 
+            ConditionStatus.Text = "Kon: " + character.GetStamina(CurrentTime()) + "/" + character.GetMaxStamina();
+            ConBar.Width = Convert.ToInt32(Math.Round(200 * (double)character.GetStamina(CurrentTime()) / (double)character.GetMaxStamina(), 0));
+
+            //czas serwera do celów testowych
+            serverTimeStamp.Text = CurrentTime().ToString();
+
             switchIncreaseButtons();
 
             remainingPoints.Text = "Pozostałe ("+character.RemainingPoints()+"): ";
 
             headId.Text = character.Equipment.Head.ToString();
 
-            DispatcherTimer backgroundTimer = new DispatcherTimer();
-            backgroundTimer.Tick += new EventHandler(TimerMethod);
-            backgroundTimer.Interval = TimeSpan.FromSeconds(1);
-            backgroundTimer.Start();
+            DispatcherTimer barsUpdater = new DispatcherTimer();
+            barsUpdater.Tick += new EventHandler(UpdateBars);
+            barsUpdater.Interval = TimeSpan.FromSeconds(1);
+            barsUpdater.Start();
         }
 
         //funkcja timera, uaktuaniająca kontrolki co sekundę
-        private void TimerMethod(object sender, EventArgs e)
+        private void UpdateBars(object sender, EventArgs e)
         {
             //zainicjalizowanie pasków stanu HP, Kondycja
             HPStatus.Text = "HP: " + character.GetHP(CurrentTime()) + "/" + character.GetMaxHP();
             HPBar.Width = Convert.ToInt32(Math.Floor(200 * (double)character.GetHP(CurrentTime()) / (double)character.GetMaxHP()));
+
+            ConditionStatus.Text = "Kon: " + character.GetStamina(CurrentTime()) + "/" + character.GetMaxStamina();
+            ConBar.Width = Convert.ToInt32(Math.Round(200 * (double)character.GetStamina(CurrentTime()) / (double)character.GetMaxStamina(), 0));
+
+            serverTimeStamp.Text = CurrentTime().ToString();
         }
 
         //obliczenie aktualnego czasu zsynchronizowanego z serwerem
