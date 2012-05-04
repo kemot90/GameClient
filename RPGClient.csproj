@@ -63,6 +63,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Location.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Logowanie.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,12 +82,16 @@
     <Compile Include="Interface.xaml.cs">
       <DependentUpon>Interface.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Location.xaml.cs">
+      <DependentUpon>Location.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Logowanie.xaml.cs">
       <DependentUpon>Logowanie.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Map.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -166,6 +174,13 @@
   <ItemGroup>
     <Resource Include="Images\coins.png" />
     <Resource Include="Images\longsword.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\exp.png" />
+    <Resource Include="Images\expborder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\map.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

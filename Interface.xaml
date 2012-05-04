@@ -10,28 +10,33 @@
     </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
+            <RowDefinition Height="120" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="222" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" HorizontalAlignment="Left">
-                <WrapPanel>
-                    <TextBlock x:Name="characterNameTop" Text="imie postaci" FontSize="14" FontWeight="Bold" />
-                    <TextBlock FontSize="14" FontWeight="Bold" Text=" (Lvl. "/>
-                    <TextBlock FontSize="14" FontWeight="Bold" x:Name="characterLvlTop" />
-                    <TextBlock FontSize="14" FontWeight="Bold" Text=")" />
-                </WrapPanel>
-                <WrapPanel>
-                    <Image Source="/RPGClient;component/Images/coins.png" Width="20" Height="20" Margin="0,0,5,0" />
-                    <TextBlock FontSize="14" FontWeight="Bold" x:Name="goldTop" Text="0" />
-                    <TextBlock FontSize="14" FontWeight="Bold" Text=" szt." />
-                </WrapPanel>
-            </StackPanel>
+            <Border Width="290" Height="110" Background="#CC000000" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Padding="10" Margin="5" Grid.Column="0" HorizontalAlignment="Left">
+                <StackPanel>
+                    <WrapPanel>
+                        <TextBlock x:Name="characterNameTop" Text="imie postaci" FontSize="14" FontWeight="Bold" />
+                        <TextBlock FontSize="14" FontWeight="Bold" Text=" (Lvl. "/>
+                        <TextBlock FontSize="14" FontWeight="Bold" x:Name="characterLvlTop" />
+                        <TextBlock FontSize="14" FontWeight="Bold" Text=")" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <Image Source="/RPGClient;component/Images/coins.png" Width="20" Height="20" Margin="0,0,5,0" />
+                        <TextBlock FontSize="14" FontWeight="Bold" x:Name="goldTop" Text="0" />
+                        <TextBlock FontSize="14" FontWeight="Bold" Text=" szt." />
+                    </WrapPanel>
+                    <TextBlock>Co się dzieje z postacią:</TextBlock>
+                    <TextBlock x:Name="characterStatusInfo" Text="Status" />
+                </StackPanel>
+            </Border>
             <StackPanel Grid.Column="1" HorizontalAlignment="Left">
                 <Canvas Width="218" Height="40" >
                     <Canvas.Background>
@@ -59,15 +64,28 @@
                         <TextBlock Width="218" TextAlignment="Center" x:Name="ConditionStatus">Kon: 75/100</TextBlock>
                     </StackPanel>
                 </Canvas>
+                <Canvas Width="318" Height="40" >
+                    <Canvas.Background>
+                        <ImageBrush ImageSource="/RPGClient;component/Images/expborder.png" />
+                    </Canvas.Background>
+                    <Border Height="22" Width="150" Canvas.Left="9" Canvas.Top="9" x:Name="ExpBar">
+                        <Border.Background>
+                            <ImageBrush Viewport="0,0,200,22" ViewportUnits="Absolute" TileMode="Tile" ImageSource="/RPGClient;component/Images/exp.png" />
+                        </Border.Background>
+                    </Border>
+                    <StackPanel Width="318" Orientation="Horizontal" Canvas.Top="12">
+                        <TextBlock Width="318" TextAlignment="Center" x:Name="ExpStatus">Exp: 50/100</TextBlock>
+                    </StackPanel>
+                </Canvas>
             </StackPanel>
-            <StackPanel Grid.Column="2" HorizontalAlignment="Left">
+            <StackPanel Grid.Column="3" HorizontalAlignment="Left">
                 <Button Content="Wyloguj" Height="23" Name="logout" Width="75" Click="logout_Click" />
                 <TextBlock>Zalogowany jako: </TextBlock>
                 <TextBlock Text="Identyfikacja" HorizontalAlignment="Left" x:Name="idText" VerticalAlignment="Top" Foreground="White" />
                 <TextBlock Text="TimeStamp" HorizontalAlignment="Left" x:Name="serverTimeStamp" VerticalAlignment="Top" Foreground="White" />
             </StackPanel>
         </Grid>
-        <TabControl Background="#DD000000" BorderBrush="{x:Null}" Grid.Row="1">
+        <TabControl Background="#CC000000" BorderBrush="{x:Null}" Grid.Row="1">
 			<TabItem Name="postacTab" TabIndex="0" IsSelected="True">
 				<TabItem.Header>
 	                <StackPanel Orientation="Horizontal">
@@ -114,6 +132,7 @@
                         <TextBlock TextAlignment="Right" VerticalAlignment="Center" x:Name="luckSum" Width="60" />
                         <Button Width="20" Height="20" Tag="luck" Content="+" Click="IncreaseFeature" x:Name="incLuck" />
                     </WrapPanel>
+                    <Button Content="Dodaj expa" Height="30" Click="Button_Click" />
                 </StackPanel>
 			</TabItem>
             <TabItem Name="mapaTab" TabIndex="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -125,32 +144,32 @@
 	            </TabItem.Header>
                 <ScrollViewer>
                     <Canvas Height="873">
-                        <Button Canvas.ZIndex="1" Height="75" Name="cityBtn1" Width="50" Canvas.Left="164" Canvas.Top="380">
+                        <Button Canvas.ZIndex="1" Height="75" x:Name="cityBtn1" Tag="1" Width="50" Canvas.Left="164" Canvas.Top="380">
                             <Button.Content>
                                 <StackPanel Width="40" Height="75">
                                     <Image Source="/RPGClient;component/Images/castle_icon1.png" />
-                                    <TextBlock TextAlignment="Center">Rheis</TextBlock>
+                                    <TextBlock Name="city1Name" TextAlignment="Center">Rheis</TextBlock>
                                 </StackPanel>
                             </Button.Content>
                         </Button>
-                        <Button Canvas.ZIndex="1" Height="30" Name="caveBtn1" Width="30" Canvas.Left="198" Canvas.Top="480">
+                        <Button Canvas.ZIndex="1" Height="30" Name="city1spot1" Width="30" Canvas.Left="198" Canvas.Top="480">
                             <Image Source="/RPGClient;component/Images/cave_icon1.png" />
                         </Button>
-                        <Button Canvas.ZIndex="1" Height="30" Name="caveBtn2" Width="30" Canvas.Left="220" Canvas.Top="385">
+                        <Button Canvas.ZIndex="1" Height="30" Name="city1spot2" Width="30" Canvas.Left="220" Canvas.Top="385">
                             <Image Source="/RPGClient;component/Images/cave_icon1.png" />
                         </Button>
-                        <Button Canvas.ZIndex="1" Height="30" Name="caveBtn3" Width="30" Canvas.Left="295" Canvas.Top="435">
+                        <Button Canvas.ZIndex="1" Height="30" Name="city1spot3" Width="30" Canvas.Left="295" Canvas.Top="435">
                             <Image Source="/RPGClient;component/Images/cave_icon1.png" />
                         </Button>
-                        <Button Canvas.ZIndex="1" Height="73" Name="cityBtn2" Width="50" Canvas.Left="287" Canvas.Top="603">
+                        <Button Canvas.ZIndex="1" Height="73" x:Name="cityBtn2" Width="50" Canvas.Left="287" Canvas.Top="603">
                             <Button.Content>
                                 <StackPanel Width="50" Height="73">
                                     <Image Source="/RPGClient;component/Images/castle_icon2.png" />
-                                    <TextBlock TextAlignment="Center">Heltald</TextBlock>
+                                    <TextBlock Name="city2Name" TextAlignment="Center">Heltald</TextBlock>
                                 </StackPanel>
                             </Button.Content>
                         </Button>
-                        <Image Canvas.Left="0" Canvas.Top="0" Canvas.ZIndex="0" Source="/RPGClient;component/Images/map.png" Width="1280" Height="873" />
+                        <Image Canvas.Left="0" Canvas.Top="0" Canvas.ZIndex="0" Source="/RPGClient;component/Images/map.jpg" Width="1280" Height="873" />
                     </Canvas>
                 </ScrollViewer>
 			</TabItem>

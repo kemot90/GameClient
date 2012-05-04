@@ -50,7 +50,7 @@
                                     <VisualState x:Name="Disabled"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Rectangle x:Name="rectangle" RadiusY="5" RadiusX="5" Stroke="White" StrokeThickness="1">
+                            <Rectangle x:Name="rectangle" RadiusY="5" RadiusX="5" Stroke="Black" StrokeThickness="2">
                                 <Rectangle.Fill>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                         <GradientStop Color="#DD000000" Offset="0"/>
@@ -87,7 +87,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter Property="Panel.ZIndex" Value="100" />
-                                <Setter TargetName="Border" Property="Background" Value="#DD000000" />
+                                <Setter TargetName="Border" Property="Background" Value="#CC000000" />
                                 <Setter TargetName="Border" Property="BorderThickness" Value="0" />
                                 <Setter Property="Foreground" Value="#FFFFFF" />
                             </Trigger>

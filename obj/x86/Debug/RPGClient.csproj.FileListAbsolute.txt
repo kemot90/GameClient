@@ -15,3 +15,5 @@ D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\GenerateResource.
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\RPGClient.exe
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\RPGClient.pdb
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\bin\Debug\RPGClient.exe.config
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\Location.baml
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Debug\Location.g.cs

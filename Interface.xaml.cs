@@ -63,6 +63,9 @@ namespace RPGClient
             characterDexterityBonus.Text = "0";
             characterLuckBonus.Text = "0";
 
+            //zmiana właściwości buttonów mapy w zależności o lokalizacji postaci
+            ChangeLocationButtonsState();
+
             //zainicjalizowanie pasków stanu HP, Kondycja
             HPStatus.Text = "HP: " + character.GetHP(CurrentTime()) + "/" + character.GetMaxHP();
             HPBar.Width = Convert.ToInt32(Math.Round(200 * (double)character.GetHP(CurrentTime()) / (double)character.GetMaxHP(), 0));
@@ -83,6 +86,16 @@ namespace RPGClient
             barsUpdater.Tick += new EventHandler(UpdateBars);
             barsUpdater.Interval = TimeSpan.FromSeconds(1);
             barsUpdater.Start();
+
+            DispatcherTimer statusUpdater = new DispatcherTimer();
+            statusUpdater.Tick += new EventHandler(UpdateStatus);
+            statusUpdater.Interval = TimeSpan.FromSeconds(1);
+            statusUpdater.Start();
+
+            DispatcherTimer expLevelUpdater = new DispatcherTimer();
+            expLevelUpdater.Tick += new EventHandler(UpdateExpLevel);
+            expLevelUpdater.Interval = TimeSpan.FromMilliseconds(30);
+            expLevelUpdater.Start();
         }
 
         //funkcja timera, uaktuaniająca kontrolki co sekundę
@@ -96,6 +109,61 @@ namespace RPGClient
             ConBar.Width = Convert.ToInt32(Math.Round(200 * (double)character.GetStamina(CurrentTime()) / (double)character.GetMaxStamina(), 0));
 
             serverTimeStamp.Text = CurrentTime().ToString();
+            ChangeLocationButtonsState();
+        }
+
+        private void UpdateExpLevel(object sender, EventArgs e)
+        {
+            if (character.Experience >= character.ExpToNextLevel())
+            {
+                character.Experience -= character.ExpToNextLevel();
+                character.Level++;
+
+                characterLvlTop.Text = character.Level.ToString();
+
+                switchIncreaseButtons();
+                remainingPoints.Text = "Pozostałe (" + character.RemainingPoints() + "): ";
+            }
+
+            ExpStatus.Text = "Exp: " + character.Experience + "/" + character.ExpToNextLevel();
+            ExpBar.Width = Convert.ToInt32(Math.Round(300 * (double)character.Experience / (double)character.ExpToNextLevel(), 0));
+        }
+
+        private void UpdateStatus(object sender, EventArgs e)
+        {
+            characterStatusInfo.Text = StatusToText();
+        }
+
+        private void ChangeLocationButtonsState()
+        {
+            city1Name.Foreground = Brushes.White;
+            city1Name.Foreground = Brushes.White;
+
+            city1spot1.Visibility = city1spot2.Visibility = city1spot3.Visibility = Visibility.Hidden;
+
+            switch (character.Location)
+            {
+                case 1:
+                    city1Name.Foreground = Brushes.DarkOrange;
+                    city1spot1.Visibility = city1spot2.Visibility = city1spot3.Visibility = Visibility.Visible;
+                    break;
+                case 2:
+                    city2Name.Foreground = Brushes.DarkOrange;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private string StatusToText()
+        {
+            switch (character.Status)
+            {
+                case CharacterStatus.IN_STANDBY:
+                    return "Twoja postać jest gotowa do działania.";
+                default:
+                    return null;
+            }
         }
 
         //obliczenie aktualnego czasu zsynchronizowanego z serwerem
@@ -150,12 +218,17 @@ namespace RPGClient
         {
             if (character.RemainingPoints() < 1)
             {
-                incDex.IsEnabled = incLuck.IsEnabled = incStam.IsEnabled = incStr.IsEnabled = false;
+                incDex.Visibility = incLuck.Visibility = incStam.Visibility = incStr.Visibility = Visibility.Hidden;
             }
             else
             {
-                incDex.IsEnabled = incLuck.IsEnabled = incStam.IsEnabled = incStr.IsEnabled = true;
+                incDex.Visibility = incLuck.Visibility = incStam.Visibility = incStr.Visibility = Visibility.Visible;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            character.Experience += 250;
         }
 
     }

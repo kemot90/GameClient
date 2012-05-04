@@ -24,6 +24,7 @@ namespace RPGClient
         private ulong lastFatigue;
         private ulong fatigue;
         private ulong travelEndTime;
+        private uint travelDestination;
         private string status;
         private uint pointRegenerationTime;
         private uint fullRegenerationTime;
@@ -60,6 +61,7 @@ namespace RPGClient
                 
                 location = uint.Parse(dane[14]);
                 travelEndTime = UInt64.Parse(dane[15]);
+                travelDestination = UInt32.Parse(dane[16]);
             }
             equip = new CharacterEquipment(id, clientTcp);
             pointRegenerationTime = 30;
@@ -104,11 +106,13 @@ namespace RPGClient
             }
         }
 
+        //obliczanie maksyamlanej wartości kondycji
         public ulong GetMaxStamina()
         {
             return (10 * strength) + (10 * stamina);
         }
 
+        //obliczanie aktualnie posiadanych punktów kondycji
         public ulong GetStamina(long currentTime)
         {
             if (this.Fatigue != 0)
@@ -130,6 +134,23 @@ namespace RPGClient
             {
                 return GetMaxStamina();
             }
+        }
+
+        //obliczanie punktów doświadczenia potrzebnych do osiągnięcia następnego poziomu
+        public ulong ExpToNextLevel()
+        {
+            ulong n1 = 0;
+            ulong n2 = 100;
+            ulong need = n2 + n1;
+
+            for (int i = 2; i <= level + 1; i++)
+            {
+                need = (n1 / 2) + n2;
+                n1 = n2;
+                n2 = need;
+            }
+
+            return need;
         }
 
         public ulong Id
@@ -539,6 +560,33 @@ namespace RPGClient
                 command.Add("character_status");
                 //pola name
                 command.Add("travelEndTime");
+                //na wartość updateTest
+                command.Add(value.ToString());
+                //gdzie wartość pola id
+                command.Add("id");
+                //jest równa identyfikatorowi gracza
+                command.Add(this.Id.ToString());
+                //uaktualnij i nie czekaj na odpowiedź
+                command.Apply(client, false);
+            }
+        }
+
+        public uint TravelDestination
+        {
+            get
+            {
+                return travelDestination;
+            }
+            set
+            {
+                travelDestination = value;
+                Command command = new Command();
+                //ustawienie żądania uaktualnienia bazy danych
+                command.Request(ClientCmd.UPDATE_DATA_BASE);
+                //w tabeli character
+                command.Add("character_status");
+                //pola name
+                command.Add("travelDestination");
                 //na wartość updateTest
                 command.Add(value.ToString());
                 //gdzie wartość pola id
