@@ -30,6 +30,7 @@ namespace RPGClient
         private Player player;
         private Character character;
         private Map map;
+        private Skills skills;
         private long timeDifference;
 
         public Interface(ulong id, TcpClient userClient, long diff)
@@ -45,6 +46,12 @@ namespace RPGClient
             player = new Player(id, client);
             character = new Character(id, client);
             map = new Map(client);
+            skills = new Skills(client);
+
+            foreach (Skill skill in skills.SkillList)
+            {
+                MessageBox.Show("Dostęp: " + skill.AccessLevel);
+            }
 
             foreach (Button btn in map.CityButtons)
             {
