@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows;
-using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
@@ -14,6 +12,7 @@ namespace Commands
         public const string GET_PLAYER_DATA = "GET_PLAYER_DATA";
         public const string GET_CHARACTER_DATA = "GET_CHARACTER_DATA";
         public const string GET_CHARACTER_EQUIPMENT = "GET_CHARACTER_EQUIPMENT";
+        public const string GET_CITIES = "GET_CITIES";
         public const string UPDATE_DATA_BASE = "UPDATE_DATA_BASE";
     }
     public class ServerCmd
@@ -21,6 +20,7 @@ namespace Commands
         public const string PLAYER_DATA = "PLAYER_DATA";
         public const string CHARACTER_DATA = "CHARACTER_DATA";
         public const string CHARACTER_EQUIPMENT = "CHARACTER_EQUIPMENT";
+        public const string CITIES = "CITIES";
         public const string DATA_BASE_UPDATED = "DATA_BASE_UPDATED";
     }
     public class Command

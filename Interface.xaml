@@ -10,7 +10,7 @@
     </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="120" />
+            <RowDefinition Height="125" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="200" />
             </Grid.ColumnDefinitions>
-            <Border Width="290" Height="110" Background="#CC000000" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Padding="10" Margin="5" Grid.Column="0" HorizontalAlignment="Left">
+            <Border Width="290" Height="115" Background="#CC000000" BorderBrush="Black" BorderThickness="3" CornerRadius="10" Padding="10" Margin="5" Grid.Column="0" HorizontalAlignment="Left">
                 <StackPanel>
                     <WrapPanel>
                         <TextBlock x:Name="characterNameTop" Text="imie postaci" FontSize="14" FontWeight="Bold" />
@@ -143,15 +143,7 @@
 	                </StackPanel>
 	            </TabItem.Header>
                 <ScrollViewer>
-                    <Canvas Height="873">
-                        <Button Canvas.ZIndex="1" Height="75" x:Name="cityBtn1" Tag="1" Width="50" Canvas.Left="164" Canvas.Top="380">
-                            <Button.Content>
-                                <StackPanel Width="40" Height="75">
-                                    <Image Source="/RPGClient;component/Images/castle_icon1.png" />
-                                    <TextBlock Name="city1Name" TextAlignment="Center">Rheis</TextBlock>
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
+                    <Canvas Height="873" x:Name="mapContainer">
                         <Button Canvas.ZIndex="1" Height="30" Name="city1spot1" Width="30" Canvas.Left="198" Canvas.Top="480">
                             <Image Source="/RPGClient;component/Images/cave_icon1.png" />
                         </Button>
@@ -160,14 +152,6 @@
                         </Button>
                         <Button Canvas.ZIndex="1" Height="30" Name="city1spot3" Width="30" Canvas.Left="295" Canvas.Top="435">
                             <Image Source="/RPGClient;component/Images/cave_icon1.png" />
-                        </Button>
-                        <Button Canvas.ZIndex="1" Height="73" x:Name="cityBtn2" Width="50" Canvas.Left="287" Canvas.Top="603">
-                            <Button.Content>
-                                <StackPanel Width="50" Height="73">
-                                    <Image Source="/RPGClient;component/Images/castle_icon2.png" />
-                                    <TextBlock Name="city2Name" TextAlignment="Center">Heltald</TextBlock>
-                                </StackPanel>
-                            </Button.Content>
                         </Button>
                         <Image Canvas.Left="0" Canvas.Top="0" Canvas.ZIndex="0" Source="/RPGClient;component/Images/map.jpg" Width="1280" Height="873" />
                     </Canvas>

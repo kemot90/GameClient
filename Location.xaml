@@ -1,8 +1,25 @@
 ﻿<Window x:Class="RPGClient.Location"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Location" Height="200" Width="300">
+        Title="Location" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="200" Width="300" WindowStyle="None" ResizeMode="NoResize" MouseLeftButtonDown="Window_MouseLeftButtonDown" Topmost="True" Canvas.Top="185" Canvas.Left="5" BorderThickness="1">
+    <Window.Background>
+        <ImageBrush ImageSource="/RPGClient;component/Images/grunge02.jpg" />
+    </Window.Background>
     <Grid>
-        
+        <StackPanel>
+            <WrapPanel>
+                <TextBlock Text="Identyfikator: " />
+                <TextBlock Text=" tag" HorizontalAlignment="Left" x:Name="idTag" VerticalAlignment="Top" Foreground="White" />
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Nazwa: " />
+                <TextBlock Text=" name" HorizontalAlignment="Left" x:Name="idCityName" VerticalAlignment="Top" Foreground="White" />
+            </WrapPanel>
+        </StackPanel>
+        <Button Name="BtnClose" Height="28" Width="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="BtnClose_Click">
+            <Button.Content>
+                <Image Source="/RPGClient;component/Images/close.png" Width="22" Height="22" />
+            </Button.Content>
+        </Button>
     </Grid>
 </Window>

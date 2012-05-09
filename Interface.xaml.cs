@@ -29,6 +29,7 @@ namespace RPGClient
         private UTF8Encoding code;
         private Player player;
         private Character character;
+        private Map map;
         private long timeDifference;
 
         public Interface(ulong id, TcpClient userClient, long diff)
@@ -43,6 +44,15 @@ namespace RPGClient
             client = userClient;
             player = new Player(id, client);
             character = new Character(id, client);
+            map = new Map(client);
+
+            foreach (Button btn in map.CityButtons)
+            {
+                btn.Click += new RoutedEventHandler(showCityForm);
+                mapContainer.Children.Add(btn);
+                //Canvas.SetLeft(btn, 50);
+                //Canvas.SetTop(btn, 50);
+            }
 
             host = Properties.Settings.Default.Host;
             port = Properties.Settings.Default.Port;
@@ -131,36 +141,79 @@ namespace RPGClient
 
         private void UpdateStatus(object sender, EventArgs e)
         {
-            characterStatusInfo.Text = StatusToText();
+            characterStatusInfo.Text = StatusUpdate();
         }
 
         private void ChangeLocationButtonsState()
         {
-            city1Name.Foreground = Brushes.White;
-            city1Name.Foreground = Brushes.White;
+            //city1Name.Foreground = Brushes.White;
+            //city1Name.Foreground = Brushes.White;
 
-            city1spot1.Visibility = city1spot2.Visibility = city1spot3.Visibility = Visibility.Hidden;
+            //city1spot1.Visibility = city1spot2.Visibility = city1spot3.Visibility = Visibility.Hidden;
 
-            switch (character.Location)
+            //switch (character.Location)
+            //{
+            //    case 1:
+            //        city1Name.Foreground = Brushes.DarkOrange;
+            //        city1spot1.Visibility = city1spot2.Visibility = city1spot3.Visibility = Visibility.Visible;
+            //        break;
+            //    case 2:
+            //        city2Name.Foreground = Brushes.DarkOrange;
+            //        break;
+            //    default:
+            //        break;
+            //}
+        }
+
+        //okno miasta - wyświetlnie okienka dialogowego z detalami i opcjami miasta
+        private void showCityForm(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+
+            //szuaknie w liście miasta o id wysłanym z sendera
+            IEnumerable<City> cities = 
+                from cityFromList in map.CityData
+                where cityFromList.Id == uint.Parse(btn.Tag.ToString())
+                select cityFromList;
+            foreach (City city in cities)
             {
-                case 1:
-                    city1Name.Foreground = Brushes.DarkOrange;
-                    city1spot1.Visibility = city1spot2.Visibility = city1spot3.Visibility = Visibility.Visible;
-                    break;
-                case 2:
-                    city2Name.Foreground = Brushes.DarkOrange;
-                    break;
-                default:
-                    break;
+                Location cityForm = new Location(city);
+                cityForm.ShowDialog();
             }
         }
 
-        private string StatusToText()
+        //pobiernia miasta o zadanym identyfikatorze
+        private City getCityById(uint id)
+        {
+            IEnumerable<City> cities =
+                from cityFromList in map.CityData
+                where cityFromList.Id == id
+                select cityFromList;
+            foreach (City city in cities)
+            {
+                return city;
+            }
+            return null;
+        }
+
+        //zamiana stałej statusu na informację o statusie
+        private string StatusUpdate()
         {
             switch (character.Status)
             {
                 case CharacterStatus.IN_STANDBY:
                     return "Twoja postać jest gotowa do działania.";
+                case CharacterStatus.IS_TRAVELING:
+                    if (character.TravelEndTime <= Convert.ToUInt64(CurrentTime()))
+                    {
+                        character.Status = CharacterStatus.IN_STANDBY;
+                        character.TravelEndTime = 0;
+                        character.Location = character.TravelDestination;
+                        character.TravelDestination = 0;
+
+                        return "Twoja postać jest gotowa do działania.";
+                    }
+                    return "Twoja postać podróżuje z " + getCityById(character.Location).Name + " do "+getCityById(character.TravelDestination).Name +"\nNa miejsce dotrze za s. " + (character.TravelEndTime - Convert.ToUInt64(CurrentTime()));
                 default:
                     return null;
             }
@@ -228,7 +281,7 @@ namespace RPGClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            character.Experience += 250;
+            character.Experience += 50;
         }
 
     }

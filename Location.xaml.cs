@@ -18,9 +18,34 @@ namespace RPGClient
     /// </summary>
     public partial class Location : Window
     {
-        public Location()
+        private City city;
+
+        public Location(City _city)
         {
             InitializeComponent();
+
+            city = _city;
+
+            idTag.Text = city.Id.ToString();
+            idCityName.Text = city.Name;
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        public City CityData
+        {
+            get
+            {
+                return city;
+            }
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
