@@ -40,7 +40,7 @@ namespace RPGClient
             Command command = new Command();
             command.Request(ClientCmd.GET_CHARACTER_DATA);
             command.Add(id.ToString());
-            string[] dane = command.Apply(client, true);
+            string[] dane = command.Send(client, true);
 
             if (dane[0] == ServerCmd.CHARACTER_DATA)
             {
@@ -189,7 +189,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -216,7 +216,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -243,7 +243,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -270,7 +270,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -297,7 +297,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -324,7 +324,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -351,7 +351,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -378,7 +378,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -405,7 +405,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -432,7 +432,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -459,7 +459,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -486,7 +486,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -513,7 +513,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -540,7 +540,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -567,7 +567,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -594,7 +594,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.Id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 

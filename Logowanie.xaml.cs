@@ -103,7 +103,7 @@ namespace RPGClient
 
             Stopwatch watch = new Stopwatch();
             watch.Start();
-            string[] args = cmd.Apply(user.Client, true);
+            string[] args = cmd.Send(user.Client, true);
             
             if (Convert.ToUInt64(args[1]) == 0)
             {

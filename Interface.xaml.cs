@@ -48,18 +48,26 @@ namespace RPGClient
             map = new Map(client);
             skills = new Skills(client);
 
-            foreach (Skill skill in skills.SkillList)
-            {
-                MessageBox.Show("Dostęp: " + skill.AccessLevel);
-            }
-
+            // WCZYTANIE MAPY
             foreach (Button btn in map.CityButtons)
             {
+                //if (uint.Parse(btn.Tag.ToString()) == character.Location)
+                //{
+                //    btn.SendTemplate();
+                //    TextBlock text = (TextBlock)btn.Template.FindName("city" + character.Location + "Name", btn);
+                //    text.Foreground = Brushes.DarkOrange;
+                //}
                 btn.Click += new RoutedEventHandler(showCityForm);
                 mapContainer.Children.Add(btn);
                 //Canvas.SetLeft(btn, 50);
                 //Canvas.SetTop(btn, 50);
             }
+
+            mapContainer.ApplyTemplate();
+
+            TextBlock text = CurrentLocationButtonText(character.Location);
+            //ustawienie jego czcionki na pomarańczową
+            text.Foreground = Brushes.DarkOrange;
 
             host = Properties.Settings.Default.Host;
             port = Properties.Settings.Default.Port;
@@ -113,6 +121,26 @@ namespace RPGClient
             expLevelUpdater.Tick += new EventHandler(UpdateExpLevel);
             expLevelUpdater.Interval = TimeSpan.FromMilliseconds(30);
             expLevelUpdater.Start();
+        }
+
+        public static T FindVisualChildByName<T>(DependencyObject parent, string name) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                string controlName = child.GetValue(Control.NameProperty) as string;
+                if (controlName == name)
+                {
+                    return child as T;
+                }
+                else
+                {
+                    T result = FindVisualChildByName<T>(child, name);
+                    if (result != null)
+                        return result;
+                }
+            }
+            return null;
         }
 
         //funkcja timera, uaktuaniająca kontrolki co sekundę
@@ -172,6 +200,18 @@ namespace RPGClient
             //}
         }
 
+        private TextBlock CurrentLocationButtonText(uint locationId)
+        {
+            //wyciągnięcie buttona z mapContainer o nazwie cityIDENTYFIKATOR
+            Button button = FindVisualChildByName<Button>(mapContainer, "city" + locationId);
+            //pobranie stackpanela z jego contentu
+            StackPanel panel = (StackPanel)button.Content;
+            //wyszukanie w stackpanelu textblock z nazwą miasta
+            TextBlock text = FindVisualChildByName<TextBlock>(panel, "city" + locationId + "Name");
+            //ustawienie jego czcionki na pomarańczową
+            return text;
+        }
+
         //okno miasta - wyświetlnie okienka dialogowego z detalami i opcjami miasta
         private void showCityForm(object sender, EventArgs e)
         {
@@ -184,7 +224,7 @@ namespace RPGClient
                 select cityFromList;
             foreach (City city in cities)
             {
-                Location cityForm = new Location(city);
+                Location cityForm = new Location(city, character.Location, client, character, timeDifference);
                 cityForm.ShowDialog();
             }
         }
@@ -213,6 +253,12 @@ namespace RPGClient
                 case CharacterStatus.IS_TRAVELING:
                     if (character.TravelEndTime <= Convert.ToUInt64(CurrentTime()))
                     {
+                        TextBlock text = CurrentLocationButtonText(character.Location);
+                        //ustawienie jego czcionki na pomarańczową
+                        text.Foreground = Brushes.White;
+                        text = CurrentLocationButtonText(character.TravelDestination);
+                        text.Foreground = Brushes.DarkOrange;
+
                         character.Status = CharacterStatus.IN_STANDBY;
                         character.TravelEndTime = 0;
                         character.Location = character.TravelDestination;
@@ -289,6 +335,15 @@ namespace RPGClient
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             character.Experience += 50;
+        }
+
+        private void city1spot2_Click(object sender, RoutedEventArgs e)
+        {
+            Enemies en = new Enemies(1, client);
+            foreach (Mob mb in en.EnemiesList)
+            {
+                MessageBox.Show(mb.Id.ToString() + " " + mb.Name + " " + mb.Level.ToString() + " " + mb.BonusHP + " " + mb.Strength.ToString() + " " + mb.Luck.ToString() + " " + mb.Dexterity.ToString() + " " + mb.Stamina.ToString() + " " + mb.GoldDrop.ToString());
+            }
         }
 
     }

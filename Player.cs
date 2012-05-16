@@ -48,7 +48,7 @@ namespace RPGClient
                 Command request = new Command(ClientCmd.GET_PLAYER_DATA);
                 request.Add(id.ToString());
                 
-                string[] dane = request.Apply(client.Client, true);
+                string[] dane = request.Send(client.Client, true);
 
                 if (dane[0] == ServerCmd.PLAYER_DATA)
                 {

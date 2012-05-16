@@ -91,7 +91,7 @@ namespace RPGClient
             string[] citiesData;
             Command request = new Command();
             request.Request(ClientCmd.GET_CITIES);
-            citiesData = request.Apply(socket, true);
+            citiesData = request.Send(socket, true);
 
             //obliczenie liczby miast
             citiesNumber = uint.Parse(citiesData[1]);

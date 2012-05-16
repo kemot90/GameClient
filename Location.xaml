@@ -8,17 +8,26 @@
     <Grid>
         <StackPanel>
             <WrapPanel>
-                <TextBlock Text="Identyfikator: " />
+                <TextBlock Text="ID miasta: " />
                 <TextBlock Text=" tag" HorizontalAlignment="Left" x:Name="idTag" VerticalAlignment="Top" Foreground="White" />
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Nazwa: " />
                 <TextBlock Text=" name" HorizontalAlignment="Left" x:Name="idCityName" VerticalAlignment="Top" Foreground="White" />
             </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Czas podróży: " />
+                <TextBlock Text=" czas" HorizontalAlignment="Left" x:Name="travelTime" VerticalAlignment="Top" Foreground="White" />
+            </WrapPanel>
         </StackPanel>
         <Button Name="BtnClose" Height="28" Width="28" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="BtnClose_Click">
             <Button.Content>
                 <Image Source="/RPGClient;component/Images/close.png" Width="22" Height="22" />
+            </Button.Content>
+        </Button>
+        <Button Name="BtnTravel" Width="28" HorizontalAlignment="Left" Height="28" VerticalAlignment="Bottom" Click="BtnTravel_Click">
+            <Button.Content>
+                <Image Source="/RPGClient;component/Images/currentLocation.png" Width="22" Height="22"/>
             </Button.Content>
         </Button>
     </Grid>

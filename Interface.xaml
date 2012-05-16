@@ -147,7 +147,7 @@
                         <Button Canvas.ZIndex="1" Height="30" Name="city1spot1" Width="30" Canvas.Left="198" Canvas.Top="480">
                             <Image Source="/RPGClient;component/Images/cave_icon1.png" />
                         </Button>
-                        <Button Canvas.ZIndex="1" Height="30" Name="city1spot2" Width="30" Canvas.Left="220" Canvas.Top="385">
+                        <Button Canvas.ZIndex="1" Height="30" Name="city1spot2" Width="30" Canvas.Left="220" Canvas.Top="385" Click="city1spot2_Click">
                             <Image Source="/RPGClient;component/Images/cave_icon1.png" />
                         </Button>
                         <Button Canvas.ZIndex="1" Height="30" Name="city1spot3" Width="30" Canvas.Left="295" Canvas.Top="435">

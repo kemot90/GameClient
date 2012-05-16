@@ -28,7 +28,7 @@ namespace RPGClient
             Command command = new Command();
             command.Request(ClientCmd.GET_CHARACTER_EQUIPMENT);
             command.Add(id.ToString());
-            string[] dane = command.Apply(client, true);
+            string[] dane = command.Send(client, true);
 
             if (dane[0] == ServerCmd.CHARACTER_EQUIPMENT)
             {
@@ -62,7 +62,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -89,7 +89,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -116,7 +116,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -143,7 +143,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
 
@@ -170,7 +170,7 @@ namespace RPGClient
                 //jest równa identyfikatorowi gracza
                 command.Add(this.id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
-                command.Apply(client, false);
+                command.Send(client, false);
             }
         }
     }

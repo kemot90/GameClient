@@ -96,7 +96,7 @@ namespace RPGClient
 
             Command request = new Command();
             request.Request(ClientCmd.GET_SKILLS);
-            result = request.Apply(socket, true);
+            result = request.Send(socket, true);
 
             if (result[0] == ServerCmd.SKILLS)
             {
