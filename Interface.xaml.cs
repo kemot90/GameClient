@@ -31,6 +31,8 @@ namespace RPGClient
         private Character character;
         private Map map;
         private Skills skills;
+        private ItemsArmor armors;
+        private ItemsWeapon weapons;
         private long timeDifference;
 
         public Interface(ulong id, TcpClient userClient, long diff)
@@ -47,6 +49,8 @@ namespace RPGClient
             character = new Character(id, client);
             map = new Map(client);
             skills = new Skills(client);
+            armors = new ItemsArmor(client);
+            weapons = new ItemsWeapon(client);
 
             // WCZYTANIE MAPY
             foreach (Button btn in map.CityButtons)

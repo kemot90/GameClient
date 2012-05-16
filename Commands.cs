@@ -17,6 +17,8 @@ namespace Commands
         public const string UPDATE_DATA_BASE = "UPDATE_DATA_BASE";
         public const string GET_SHORTEST_PATH = "GET_SHORTEST_PATH";
         public const string GET_ENEMIES = "GET_ENEMIES";
+        public const string GET_ITEMS_ARMORS = "GET_ITEMS_ARMORS";
+        public const string GET_ITEMS_WEAPONS = "GET_ITEMS_WEAPONS";
     }
     public class ServerCmd
     {
@@ -28,6 +30,8 @@ namespace Commands
         public const string DATA_BASE_UPDATED = "DATA_BASE_UPDATED";
         public const string SHORTEST_PATH = "SHORTEST_PATH";
         public const string ENEMIES = "ENEMIES";
+        public const string ARMORS = "ARMORS";
+        public const string WEAPONS = "WEAPONS";
     }
     public class Command
     {

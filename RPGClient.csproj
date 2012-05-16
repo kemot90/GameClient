@@ -60,6 +60,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Enemies.cs" />
+    <Compile Include="ItemArmor.cs" />
+    <Compile Include="ItemWeapon.cs" />
     <Compile Include="Mob.cs" />
     <Compile Include="Skills.cs" />
     <Page Include="Interface.xaml">
