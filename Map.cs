@@ -77,10 +77,74 @@ namespace RPGClient
         }
     }
 
+    public class Spot
+    {
+        private uint id_loc;
+        private uint id_city;
+        private char type;
+        private string name;
+        private uint leftCoordinate;
+        private uint topCoordinate;
+
+        public Spot(uint _id_loc, uint _id_city, char _type, string _name, uint _leftCoordinate, uint _topCoordinate)
+        {
+            id_loc = _id_loc;
+            id_city = _id_city;
+            type = _type;
+            name = _name;
+            leftCoordinate = _leftCoordinate;
+            topCoordinate = _topCoordinate;
+        }
+        public uint IdLoc
+        {
+            get
+            {
+                return id_loc;
+            }
+        }
+        public uint IdCity
+        {
+            get
+            {
+                return id_city;
+            }
+        }
+        public char Type
+        {
+            get
+            {
+                return type;
+            }
+        }
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+        public uint LeftCoordinate
+        {
+            get
+            {
+                return leftCoordinate;
+            }
+        }
+        public uint TopCoordinate
+        {
+            get
+            {
+                return topCoordinate;
+            }
+        }
+    }
+
     public class Map
     {
         private List<Button> cityButtons = new List<Button>();
+        private List<Button> spotButtons = new List<Button>();
         private List<City> cityData = new List<City>();
+        private List<Spot> spotData = new List<Spot>();
         private Socket socket;
 
         public Map(TcpClient clientSocket)
@@ -88,10 +152,13 @@ namespace RPGClient
             socket = clientSocket.Client;
 
             uint citiesNumber = 0;
-            string[] citiesData;
+            uint spotsNumber = 0;
+            string[] citiesData, spotsData;
             Command request = new Command();
             request.Request(ClientCmd.GET_CITIES);
             citiesData = request.Send(socket, true);
+            request.Request(ClientCmd.GET_SPOTS);
+            spotsData = request.Send(socket, true);
 
             //obliczenie liczby miast
             citiesNumber = uint.Parse(citiesData[1]);
@@ -107,7 +174,23 @@ namespace RPGClient
                     );
                 cityData.Add(city);
             }
-            //tworzenie buttonów na podstawie danych z bazki
+
+            //obliczenie liczby spotów
+            spotsNumber = uint.Parse(spotsData[1]);
+            for (int i = 2; i < spotsData.Length; i += 6)
+            {
+                Spot spot = new Spot(
+                    uint.Parse(spotsData[i]),       //id lokacji
+                    uint.Parse(spotsData[i + 1]),   //id miasta do którego przynależy
+                    char.Parse(spotsData[i + 2]),   //typ lookacji
+                    spotsData[i + 3],               //name
+                    uint.Parse(spotsData[i + 4]),   //leftCoordinate
+                    uint.Parse(spotsData[i + 5])    //topCoordinate
+                    );
+                spotData.Add(spot);
+            }
+
+            //tworzenie buttonów miast na podstawie danych z bazki
             foreach (City city in cityData)
             {
                 //najpierw sam button
@@ -156,6 +239,60 @@ namespace RPGClient
                 //dodanie do listy buttonów mapy
                 cityButtons.Add(btn);
             }
+
+            //tworzenie buttonów spotów na podstawie danych z bazki
+            foreach (Spot spot in spotData)
+            {
+                //najpierw sam button
+                Button btn = new Button();
+                //obrazek, który będzie jego zawartością
+                Image btnImage = new Image();
+                //i jego źródło
+                btnImage.Source = new BitmapImage(new Uri("pack://application:,,,/Images/spot_" + spot.Type + ".png"));
+                btnImage.Width = 30;
+                btnImage.Height = 30;
+                //dodanie obrazka do contentu
+                btn.Content = btnImage;
+                //nazwanie buttona spotu
+                btn.Name = "city" + spot.IdCity + "spot" + spot.IdLoc;
+                //jego szerokość na 30 px
+                btn.Width = 30;
+                //cały content wyśrodkowany
+                btn.HorizontalAlignment = HorizontalAlignment.Center;
+                //dodanie tagu ze spotem
+                btn.Tag = spot;
+                //ukrycie buttona
+                btn.Visibility = Visibility.Hidden;
+                //określenie położenia na mapie
+                Canvas.SetLeft(btn, spot.LeftCoordinate);
+                Canvas.SetTop(btn, spot.TopCoordinate);
+                //dodanie do listy buttonów mapy
+                spotButtons.Add(btn);
+            }
+        }
+
+        //włączanie/wyłączanie buttonów miast/okolic dla currentLocation
+        public void SetMapButtons(bool value, uint currentLocation)
+        {
+            foreach (Button btn in CityButtons)
+            {
+                btn.IsEnabled = value;
+            }
+            foreach (Button btn in SpotButtons)
+            {
+                Spot spot = btn.Tag as Spot;
+                if (value)
+                {
+                    if (spot.IdCity == currentLocation)
+                    {
+                        btn.Visibility = Visibility.Visible;
+                    }
+                }
+                else
+                {
+                    btn.Visibility = Visibility.Hidden;
+                }
+            }
         }
 
         public List<Button> CityButtons
@@ -171,6 +308,22 @@ namespace RPGClient
             get
             {
                 return cityData;
+            }
+        }
+
+        public List<Button> SpotButtons
+        {
+            get
+            {
+                return spotButtons;
+            }
+        }
+
+        public List<Spot> SpotData
+        {
+            get
+            {
+                return spotData;
             }
         }
     }

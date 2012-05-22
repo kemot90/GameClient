@@ -9,11 +9,15 @@
         <StackPanel>
             <WrapPanel>
                 <TextBlock Text="ID miasta: " />
-                <TextBlock Text=" tag" HorizontalAlignment="Left" x:Name="idTag" VerticalAlignment="Top" Foreground="White" />
+                <TextBlock Text=" tag" HorizontalAlignment="Left" x:Name="CityTag" VerticalAlignment="Top" Foreground="White" />
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Nazwa: " />
-                <TextBlock Text=" name" HorizontalAlignment="Left" x:Name="idCityName" VerticalAlignment="Top" Foreground="White" />
+                <TextBlock Text=" name" HorizontalAlignment="Left" x:Name="CityName" VerticalAlignment="Top" Foreground="White" />
+            </WrapPanel>
+            <WrapPanel>
+                <TextBlock Text="Poziom dostępu: " />
+                <TextBlock Text=" lvl" HorizontalAlignment="Left" x:Name="AccessLevel" VerticalAlignment="Top" Foreground="White" />
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Text="Czas podróży: " />

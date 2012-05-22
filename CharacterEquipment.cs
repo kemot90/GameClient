@@ -10,7 +10,7 @@ namespace RPGClient
 {
     public class CharacterEquipment
     {
-        public enum Part { Head, Chest, Legs, Weapon, Shield };
+        public enum Part { Head, Chest, Legs, Weapon, Shield, Other };
         private ulong id;
         private uint head;
         private uint chest;
@@ -39,6 +39,7 @@ namespace RPGClient
                 shield = uint.Parse(dane[5]);
             }
         }
+
         public uint Head
         {
             get
@@ -171,6 +172,86 @@ namespace RPGClient
                 command.Add(this.id.ToString());
                 //uaktualnij i nie czekaj na odpowiedź
                 command.Send(client, false);
+            }
+        }
+
+        public Item GetItemById(uint id)
+        {
+            string[] result;
+            Item item;
+            Command request = new Command();
+            request.Request(ClientCmd.GET_ITEM_BY_ID);
+            request.Add(id.ToString());
+
+            result = request.Send(client, true);
+
+            try
+            {
+                item = new Item(
+                    uint.Parse(result[1]),
+                    result[2],
+                    result[3],
+                    uint.Parse(result[4]),
+                    result[5]
+                    );
+            }
+            catch
+            {
+                item = null;
+            }
+
+            return item;
+        }
+
+        public uint WearItem(Part bodyPart, uint idItem)
+        {
+            uint previousItem = 0;
+
+            switch (bodyPart)
+            {
+                case Part.Chest:
+                    previousItem = Chest;
+                    Chest = idItem;
+                    break;
+                case Part.Head:
+                    previousItem = Head;
+                    Head = idItem;
+                    break;
+                case Part.Legs:
+                    previousItem = Legs;
+                    Legs = idItem;
+                    break;
+                case Part.Shield:
+                    previousItem = Shield;
+                    Shield = idItem;
+                    break;
+                case Part.Weapon:
+                    previousItem = Weapon;
+                    Weapon = idItem;
+                    break;
+            }
+            return previousItem;
+        }
+
+        public void takeoff(Part bodyPart)
+        {
+            switch (bodyPart)
+            {
+                case Part.Chest:
+                    Chest = 0;
+                    break;
+                case Part.Head:
+                    Head = 0;
+                    break;
+                case Part.Legs:
+                    Legs = 0;
+                    break;
+                case Part.Shield:
+                    Shield = 0;
+                    break;
+                case Part.Weapon:
+                    Weapon = 0;
+                    break;
             }
         }
     }

@@ -29,6 +29,7 @@ namespace RPGClient
         private uint pointRegenerationTime;
         private uint fullRegenerationTime;
         private CharacterEquipment equip;
+        private CharacterStorage storage;
 
         private Socket client;
 
@@ -64,6 +65,7 @@ namespace RPGClient
                 travelDestination = UInt32.Parse(dane[16]);
             }
             equip = new CharacterEquipment(id, clientTcp);
+            storage = new CharacterStorage(id, clientTcp);
             pointRegenerationTime = 30;
             fullRegenerationTime = 15 * 60;
             //przykładowa zmiana imienia postaci
@@ -603,6 +605,14 @@ namespace RPGClient
             get
             {
                 return equip;
+            }
+        }
+
+        public CharacterStorage Storage
+        {
+            get
+            {
+                return storage;
             }
         }
 

@@ -1,9 +1,11 @@
 ﻿namespace RPGClient
 {
-    class Mob : Creature
+    public class Mob : Creature
     {
         private ulong bonusHP;
         private uint goldDrop;
+        private uint expDrop;
+        private string icon_name;
 
         //konstruktor
         public Mob(
@@ -15,7 +17,9 @@
             uint _luck,
             uint _dexterity,
             uint _stamina,
-            uint _glodDrop
+            uint _glodDrop,
+            uint _expDrop,
+            string _icon_name
             )
         {
             id = _id;
@@ -27,6 +31,8 @@
             dexterity = _dexterity;
             stamina = _stamina;
             goldDrop = _glodDrop;
+            expDrop = _expDrop;
+            icon_name = _icon_name;
         }
 
         #region AKCESORY
@@ -139,8 +145,32 @@
             }
         }
 
+        public uint ExpDrop
+        {
+            get
+            {
+                return expDrop;
+            }
+            set
+            {
+                expDrop = value;
+            }
+        }
+
+        public string IconName
+        {
+            get
+            {
+                return icon_name;
+            }
+            set
+            {
+                icon_name = value;
+            }
+        }
+
         #endregion
-        
+
         //obliczanie maksymalnej wartości HP
         public ulong GetMaxHP()
         {

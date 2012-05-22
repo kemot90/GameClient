@@ -7,7 +7,7 @@ using Commands;
 
 namespace RPGClient
 {
-    class ItemWeapon
+    public class Weapon
     {
         private uint id;
         private string type;
@@ -20,7 +20,7 @@ namespace RPGClient
         private uint dexterity;
         private uint luck;
 
-        public ItemWeapon(uint _id, string _type, uint _price, string _name, uint _min_attack, uint _max_attack, uint _strength, uint _stamina, uint _dexterity, uint _luck)
+        public Weapon(uint _id, string _type, uint _price, string _name, uint _min_attack, uint _max_attack, uint _strength, uint _stamina, uint _dexterity, uint _luck)
         {
             id = _id;
             type = _type;
@@ -118,20 +118,33 @@ namespace RPGClient
 
     class ItemsWeapon
     {
-        private List<ItemWeapon> itemWList;
+        private List<Weapon> weaponsList;
         private Socket socket;
 
-        public List<ItemWeapon> ItemWList
+        public List<Weapon> WeaponsList
         {
             get
             {
-                return itemWList;
+                return weaponsList;
             }
+        }
+        public Weapon GetWeaponById(uint id)
+        {
+            //pobranie broni o podanym id
+            IEnumerable<Weapon> weapons =
+                from weaponsListResult in weaponsList
+                where weaponsListResult.Id == id
+                select weaponsListResult;
+            foreach (Weapon weapon in weapons)
+            {
+                return weapon;
+            }
+            return null;
         }
 
         public ItemsWeapon(TcpClient client)
         {
-            itemWList = new List<ItemWeapon>();
+            weaponsList = new List<Weapon>();
             socket = client.Client;
             string[] result;
 
@@ -143,7 +156,7 @@ namespace RPGClient
             {
                 for (int i = 1; i < result.Length; i += 10)
                 {
-                    ItemWeapon weapon = new ItemWeapon(
+                    Weapon weapon = new Weapon(
                         uint.Parse(result[i]),
                         result[i+1],
                         uint.Parse(result[i+2]),
@@ -155,7 +168,7 @@ namespace RPGClient
                         uint.Parse(result[i+8]),
                         uint.Parse(result[i+9])
                         );
-                    itemWList.Add(weapon);
+                    weaponsList.Add(weapon);
                 }
             }
         }

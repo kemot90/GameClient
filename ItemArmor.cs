@@ -7,7 +7,7 @@ using Commands;
 
 namespace RPGClient
 {
-    class ItemArmor
+    public class Armor
     {
         private uint id;
         private string type;
@@ -20,7 +20,7 @@ namespace RPGClient
         private uint dexterity;
         private uint luck;
 
-        public ItemArmor(uint _id, string _type, uint _price, string _name, string _part, uint _armor, uint _strength, uint _stamina, uint _dexterity, uint _luck)
+        public Armor(uint _id, string _type, uint _price, string _name, string _part, uint _armor, uint _strength, uint _stamina, uint _dexterity, uint _luck)
         {
             id = _id;
             type = _type;
@@ -74,7 +74,7 @@ namespace RPGClient
             }
         }
 
-        public uint Armor
+        public uint ArmorPoints
         {
             get
             {
@@ -113,25 +113,38 @@ namespace RPGClient
                 return luck;
             }
         }
-
     }
 
     class ItemsArmor
     {
-        private List<ItemArmor> itemAList;
+        private List<Armor> armorsList;
         private Socket socket;
 
-        public List<ItemArmor> ItemAList
+        public List<Armor> ArmorsList
         {
             get
             {
-                return itemAList;
+                return armorsList;
             }
+        }
+
+        public Armor GetArmorById(uint id)
+        {
+            //pobranie broni o podanym id
+            IEnumerable<Armor> armors =
+                from armorsListResult in armorsList
+                where armorsListResult.Id == id
+                select armorsListResult;
+            foreach (Armor armor in armors)
+            {
+                return armor;
+            }
+            return null;
         }
 
         public ItemsArmor(TcpClient client)
         {
-            itemAList = new List<ItemArmor>();
+            armorsList = new List<Armor>();
             socket = client.Client;
             string[] result;
 
@@ -143,7 +156,7 @@ namespace RPGClient
             {
                 for (int i = 1; i < result.Length; i += 10)
                 {
-                    ItemArmor armor = new ItemArmor(
+                    Armor armor = new Armor(
                         uint.Parse(result[i]),
                         result[i+1],
                         uint.Parse(result[i+2]),
@@ -155,7 +168,7 @@ namespace RPGClient
                         uint.Parse(result[i+8]),
                         uint.Parse(result[i+9])
                         );
-                    itemAList.Add(armor);
+                    armorsList.Add(armor);
                 }
             }
         }

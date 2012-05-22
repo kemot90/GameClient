@@ -5,10 +5,12 @@ D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\ResolveAssembly
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\Interface.baml
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\Location.baml
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\Logowanie.baml
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\Place.baml
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\App.baml
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\Interface.g.cs
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\Location.g.cs
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\Logowanie.g.cs
+D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\Place.g.cs
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\App.g.cs
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\RPGClient_MarkupCompile.cache
 D:\Inne\Uczelnia\III rok\PPZ\RPGClient\RPGClient\obj\x86\Release\RPGClient.g.resources

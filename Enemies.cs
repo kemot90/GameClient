@@ -7,10 +7,10 @@ using Commands;
 
 namespace RPGClient
 {
-    class Enemies
+    public class Enemies
     {
         //tutaj będą trzymane wszystkie potworki w danej okolicy
-        List<Mob> enemiesList = new List<Mob>();
+        private List<Mob> enemiesList = new List<Mob>();
         private uint mobsCount = 0;
 
         //do polaczenia
@@ -31,18 +31,20 @@ namespace RPGClient
             {
                 mobsCount = uint.Parse(result[1]);
 
-                for (int i = 2; i < result.Length; i += 9)
+                for (int i = 2; i < result.Length; i += 11)
                 {
                     Mob mb = new Mob(
                                 ulong.Parse(result[i]),
-                                (result[i+1]),
-                                uint.Parse(result[i+2]),
-                                ulong.Parse(result[i+3]),
-                                uint.Parse(result[i+4]),
-                                uint.Parse(result[i+5]),
-                                uint.Parse(result[i+6]),
-                                uint.Parse(result[i+7]),
-                                uint.Parse(result[i+8])
+                                (result[i + 1]),
+                                uint.Parse(result[i + 2]),
+                                ulong.Parse(result[i + 3]),
+                                uint.Parse(result[i + 4]),
+                                uint.Parse(result[i + 5]),
+                                uint.Parse(result[i + 6]),
+                                uint.Parse(result[i + 7]),
+                                uint.Parse(result[i + 8]),
+                                uint.Parse(result[i + 9]),
+                                (result[i + 10])
                                 );
 
                     enemiesList.Add(mb);

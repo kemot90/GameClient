@@ -24,22 +24,30 @@ namespace RPGClient
         private uint currentLocation;
         private Socket socket;
         private Character character;
+        private Map map;
         private long timeDifference;
         private uint _travelTime;
 
 
-        public Location(City _city, uint location, TcpClient client, Character _character, long _timeDifference)
+        public Location(City _city, uint location, TcpClient client, Character _character, long _timeDifference, Map _map)
         {
             InitializeComponent();
 
             city = _city;
-            character = _character;
-
-            timeDifference = _timeDifference;
-            idTag.Text = city.Id.ToString();
-            idCityName.Text = city.Name;
             currentLocation = location;
             socket = client.Client;
+            character = _character;
+            timeDifference = _timeDifference;
+            map = _map;
+
+            if (character.Level < city.AccessLevel)
+            {
+                BtnTravel.IsEnabled = false;
+            }
+
+            CityTag.Text = city.Id.ToString();
+            CityName.Text = city.Name;
+            AccessLevel.Text = city.AccessLevel.ToString();
             _travelTime = GetShortestPath();
             travelTime.Text = _travelTime.ToString();
         }
@@ -76,6 +84,7 @@ namespace RPGClient
         private void BtnTravel_Click(object sender, RoutedEventArgs e)
         {
             //BtnTravel.IsEnabled = false;
+            map.SetMapButtons(false, character.Location);
             Travel();
             Close();
         }

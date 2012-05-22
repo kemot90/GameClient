@@ -144,15 +144,6 @@
 	            </TabItem.Header>
                 <ScrollViewer>
                     <Canvas Height="873" x:Name="mapContainer">
-                        <Button Canvas.ZIndex="1" Height="30" Name="city1spot1" Width="30" Canvas.Left="198" Canvas.Top="480">
-                            <Image Source="/RPGClient;component/Images/cave_icon1.png" />
-                        </Button>
-                        <Button Canvas.ZIndex="1" Height="30" Name="city1spot2" Width="30" Canvas.Left="220" Canvas.Top="385" Click="city1spot2_Click">
-                            <Image Source="/RPGClient;component/Images/cave_icon1.png" />
-                        </Button>
-                        <Button Canvas.ZIndex="1" Height="30" Name="city1spot3" Width="30" Canvas.Left="295" Canvas.Top="435">
-                            <Image Source="/RPGClient;component/Images/cave_icon1.png" />
-                        </Button>
                         <Image Canvas.Left="0" Canvas.Top="0" Canvas.ZIndex="0" Source="/RPGClient;component/Images/map.jpg" Width="1280" Height="873" />
                     </Canvas>
                 </ScrollViewer>
@@ -164,10 +155,220 @@
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0"><Run Text="Ekwipunek"/></TextBlock>
                     </StackPanel>
                 </TabItem.Header>
-                <StackPanel>
-                    <TextBlock>Głowa: </TextBlock>
-                    <TextBlock x:Name="headId" />
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="700" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer Width="700" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Grid.Column="0">
+                        <WrapPanel Width="675">
+                            <Border CornerRadius="12" Margin="5" Padding="5,5,5,5" Background="#88000000" BorderBrush="#EE000000" BorderThickness="2">
+                                <StackPanel HorizontalAlignment="Left" Margin="0,0,0,5" Width="200">
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="DarkOrange" DataContext="{Binding}" Height="22" FontSize="15">Broń:</TextBlock>
+                                    <Image x:Name="weaponSpotImg" Source="/RPGClient;component/Images/weaponEnabled.png" Height="41" Width="41" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="LeftToRight" MinWidth="0" />
+                                    <WrapPanel>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="42">Nazwa:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="weaponName" Width="126" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Obrażenia:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="weaponAttack" Width="88" Foreground="Red" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/str.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Siła:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="weaponStrength" Width="66" FontWeight="Bold" Foreground="Lime" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/stam.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Wytrzymałość:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="weaponStamina" Width="66" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/dex.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Zręczność:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="weaponDexterity" Width="66" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/luck.gif" Width="26" Height="25" Margin="0,0,0,0" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" >Szczęście:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Left" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="weaponLuck" Width="66" />
+                                    </WrapPanel>
+                                    <Button x:Name="weaponTakeoff" Content="Zdejmij" Height="30" Width="100" Click="takeoff" />
+                                </StackPanel>
+                            </Border>
+                            <Border CornerRadius="12" Margin="5" Padding="5,5,5,5" Background="#88000000" BorderBrush="#EE000000" BorderThickness="2">
+                                <StackPanel HorizontalAlignment="Left" Margin="0,0,0,5" Width="200">
+                                    <TextBlock HorizontalAlignment="Center"  TextAlignment="Center" VerticalAlignment="Center" Foreground="DarkOrange" DataContext="{Binding}" Height="22" FontSize="15">Napierśnik:</TextBlock>
+                                    <Image x:Name="chestSpotImg" Source="/RPGClient;component/Images/chestEnabled.png" Height="41" Width="41" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="LeftToRight" MinWidth="0" />
+                                    <WrapPanel>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="42">Nazwa:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="armorName" Width="126" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Punkty zbroi:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="armorArmor" Width="88" Foreground="Red" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/str.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Siła:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="armorStrength" Width="66" FontWeight="Bold" Foreground="Lime" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/stam.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Wytrzymałość:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="armorStamina" Width="66" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/dex.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Zręczność:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="armorDexterity" Width="66" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/luck.gif" Width="26" Height="25" Margin="0,0,0,0" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" >Szczęście:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Left" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="armorLuck" Width="66" />
+                                    </WrapPanel>
+                                    <Button x:Name="chestTakeoff" Content="Zdejmij" Height="30" Width="100" Click="takeoff" />
+                                </StackPanel>
+                            </Border>
+                            <Border CornerRadius="12" Margin="5" Padding="5,5,5,5" Background="#88000000" BorderBrush="#EE000000" BorderThickness="2">
+                                <StackPanel HorizontalAlignment="Left" Margin="0,0,0,5" Width="200">
+                                    <TextBlock HorizontalAlignment="Center"  TextAlignment="Center" VerticalAlignment="Center" Foreground="DarkOrange" DataContext="{Binding}" Height="22" FontSize="15">Nagolenniki:</TextBlock>
+                                    <Image x:Name="bootsSpotImg" Source="/RPGClient;component/Images/bootsEnabled.png" Height="41" Width="41" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="LeftToRight" MinWidth="0" />
+                                    <WrapPanel>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="42">Nazwa:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="legsName" Width="126" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Punkty zbroi:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="legsArmor" Width="88" Foreground="Red" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/str.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Siła:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="legsStrength" Width="66" FontWeight="Bold" Foreground="Lime" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/stam.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Wytrzymałość:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="legsStamina" Width="66" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/dex.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Zręczność:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="legsDexterity" Width="66" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/luck.gif" Width="26" Height="25" Margin="0,0,0,0" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" >Szczęście:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Left" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="legsLuck" Width="66" />
+                                    </WrapPanel>
+                                    <Button x:Name="bootsTakeoff" Content="Zdejmij" Height="30" Width="100" Click="takeoff" />
+                                </StackPanel>
+                            </Border>
+                            <Border CornerRadius="12" Margin="5" Padding="5,5,5,5" Background="#88000000" BorderBrush="#EE000000" BorderThickness="2">
+                                <StackPanel HorizontalAlignment="Left" Margin="0,0,0,5" Width="200">
+                                    <TextBlock HorizontalAlignment="Center"  TextAlignment="Center" VerticalAlignment="Center" Width="78" Foreground="DarkOrange" DataContext="{Binding}" Height="22" FontSize="15">Hełm:</TextBlock>
+                                    <Image x:Name="helmetSpotImg" Source="/RPGClient;component/Images/helmetEnabled.png" Height="41" Width="41" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="LeftToRight" MinWidth="0" />
+                                    <WrapPanel>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="42">Nazwa:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="headName" Width="126" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Punkty zbroi:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="headArmor" Width="88" Foreground="Red" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/str.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Siła:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="headStrength" Width="66" FontWeight="Bold" Foreground="Lime" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/stam.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Wytrzymałość:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="headStamina" Width="66" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/dex.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Zręczność:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="headDexterity" Width="66" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/luck.gif" Width="26" Height="25" Margin="0,0,0,0" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" >Szczęście:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Left" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="headLuck" Width="66" />
+                                    </WrapPanel>
+                                    <Button x:Name="helmetTakeoff" Content="Zdejmij" Height="30" Width="100" Click="takeoff" />
+                                </StackPanel>
+                            </Border>
+                            <Border CornerRadius="12" Margin="5" Padding="5,5,5,5" Background="#88000000" BorderBrush="#EE000000" BorderThickness="2">
+                                <StackPanel HorizontalAlignment="Left" Margin="0,0,0,5" Width="200">
+                                    <TextBlock HorizontalAlignment="Center"  TextAlignment="Center" VerticalAlignment="Center" Width="78" Foreground="DarkOrange" DataContext="{Binding}" Height="22" FontSize="15">Tarcza:</TextBlock>
+                                    <Image x:Name="shieldSpotImg" Source="/RPGClient;component/Images/shieldEnabled.png" Height="41" Width="41" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FlowDirection="LeftToRight" MinWidth="0" />
+                                    <WrapPanel>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="42">Nazwa:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="shieldName" Width="126" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Punkty zbroi:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="shieldArmor" Width="88" Foreground="Red" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/str.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Siła:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" x:Name="shieldStrength" Width="66" FontWeight="Bold" Foreground="Lime" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/stam.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Wytrzymałość:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="shieldStamina" Width="66" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/dex.gif" Width="26" Height="25" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80">Zręczność:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Right" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="shieldDexterity" Width="66" FontWeight="Bold" />
+                                    </WrapPanel>
+                                    <WrapPanel>
+                                        <Image Source="/RPGClient;component/Images/luck.gif" Width="26" Height="25" Margin="0,0,0,0" />
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" >Szczęście:</TextBlock>
+                                        <TextBlock HorizontalAlignment="Left" Foreground="Lime" VerticalAlignment="Center" TextAlignment="Right" x:Name="shieldLuck" Width="66" />
+                                    </WrapPanel>
+                                    <Button x:Name="shieldTakeoff" Content="Zdejmij" Height="30" Width="100" Click="takeoff" />
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
+                    </ScrollViewer>
+
+                    <TabControl Background="Transparent"  BorderBrush="{x:Null}" Grid.Column="1">
+                        <TabItem TabIndex="0" IsSelected="True">
+                            <TabItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/RPGClient;component/Images/weapons.png" Height="30" Width="30" />
+                                    <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">Bronie</TextBlock>
+                                </StackPanel>
+                            </TabItem.Header>
+                            <ScrollViewer Width="450" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Left">
+                                <StackPanel x:Name="weaponList">
+                                    <TextBlock>Bronie</TextBlock>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem TabIndex="1">
+                            <TabItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/RPGClient;component/Images/armors.png" Height="30" Width="30" />
+                                    <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">Pancerze</TextBlock>
+                                </StackPanel>
+                            </TabItem.Header>
+                            <ScrollViewer Width="450" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Left">
+                                <StackPanel x:Name="armorList">
+                                    <TextBlock>Pancerze</TextBlock>
+                                </StackPanel>
+                            </ScrollViewer>                  
+                        </TabItem>
+                    </TabControl>
+                </Grid>
             </TabItem>
             <TabItem Name="fightTab" TabIndex="1">
                 <TabItem.Header>

@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="RPGClient.App" Collapsed="true">
+    <Position X="15.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.CharacterStatus">
+    <Position X="1.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAACAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Character">
+    <Position X="5.25" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BAQKAQDEBBAAgAQQgCIAEERAAABgAABBQCAAZhQAQgE=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.CharacterEquipment">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="RPGClient.CharacterEquipment.Part" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>CharacterEquipment.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAABAgAEAQIABAAIAAAAACABAAAgAQAAABAEAAgA=</HashCode>
+      <FileName>CharacterEquipment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Creature" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAgAAAAEAAAAACAAEEAAAAQAAAAAAAAgA=</HashCode>
+      <FileName>Creature.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Enemies">
+    <Position X="8" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAIACBAAAAgA=</HashCode>
+      <FileName>Enemies.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Interface">
+    <Position X="12" Y="1.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ECJoEBQEQAAQAKAAAQgAQEMgCAAAUACJEAAElhACAAA=</HashCode>
+      <FileName>Interface.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.ItemArmor">
+    <Position X="18.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAACAJQAAgCQAAEAAAATAAABFgAAAUQAAABAAAgA=</HashCode>
+      <FileName>ItemArmor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.ItemsArmor">
+    <Position X="18.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAMAAAACAAA=</HashCode>
+      <FileName>ItemArmor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.ItemWeapon" Collapsed="true">
+    <Position X="15.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAADAACABQAAgAQAAEAAAATAAABFgAAQQQAAEBAAAgA=</HashCode>
+      <FileName>ItemWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.ItemsWeapon">
+    <Position X="20.25" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAACAAAAAgAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>ItemWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Location">
+    <Position X="15.25" Y="5.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AEAIEAAAAAAIAAAACAAACAAAAAAIAACAAAEAgAADAgA=</HashCode>
+      <FileName>Location.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.MainWindow">
+    <Position X="25.75" Y="1.75" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="RPGClient.MainWindow.SetBool" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Logowanie.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAABAAAAAAAAAAAAIAEAAAgAAAgAAAAAAQA=</HashCode>
+      <FileName>Logowanie.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.City">
+    <Position X="20.25" Y="10.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABACAAAAAgAAAAIAAAAgAAQAAAAEEAAAAQAgAAEAAgA=</HashCode>
+      <FileName>Map.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Spot">
+    <Position X="18.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAIAAAAgAAQAAAAFAAgAAUAgBAQAAAA=</HashCode>
+      <FileName>Map.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Map">
+    <Position X="15.25" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAQAAACABAAAAAQAAAAAEAAAABAAA=</HashCode>
+      <FileName>Map.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Mob">
+    <Position X="8" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgACAACAAJAAAASAgAAAAARAAQBAAAABAAAAAAIAAIA=</HashCode>
+      <FileName>Mob.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Place">
+    <Position X="15.25" Y="10.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAACAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Place.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Player">
+    <Position X="10" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAQCABAEAgAAAAAAAAIAAAAAgCAAgQBgAAEgA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Skill">
+    <Position X="20.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACAACABAAAgAQAAEAAAABAAABAEAAAQAAAAAAAAgA=</HashCode>
+      <FileName>Skills.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Skills">
+    <Position X="22" Y="6" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAEAAAAAAAA=</HashCode>
+      <FileName>Skills.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Commands.ClientCmd">
+    <Position X="27.5" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>BABAAAAAAACAUAAAAEAAAAABEAAACAAAAAgBAIAAABA=</HashCode>
+      <FileName>Commands.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Commands.ServerCmd">
+    <Position X="27.5" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAEAAAAAAAIAAAAAAAAAAQgAAQAAAAAAAgUAABABI=</HashCode>
+      <FileName>Commands.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Commands.Command">
+    <Position X="23" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAEAAAQAAAAQAQEBAAAAAJAAAgAAAAAAAAgBAAAA=</HashCode>
+      <FileName>Commands.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Properties.Resources">
+    <Position X="24" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RPGClient.Properties.Settings" Collapsed="true">
+    <Position X="19.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAACAABCAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

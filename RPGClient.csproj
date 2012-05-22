@@ -59,10 +59,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CharacterStorage.cs" />
     <Compile Include="Enemies.cs" />
     <Compile Include="ItemArmor.cs" />
     <Compile Include="ItemWeapon.cs" />
     <Compile Include="Mob.cs" />
+    <Compile Include="Place.xaml.cs">
+      <DependentUpon>Place.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Skills.cs" />
     <Page Include="Interface.xaml">
       <SubType>Designer</SubType>
@@ -94,6 +98,10 @@
       <DependentUpon>Logowanie.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Place.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Map.cs" />
@@ -116,7 +124,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="ProjectClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Connection.config" />
     <Resource Include="Fonts\Ringbearer.TTF" />
     <None Include="Properties\Settings.settings">
@@ -192,6 +200,55 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\currentLocation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\svard.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\spot_b.png" />
+    <Resource Include="Images\spot_j.png" />
+    <Resource Include="Images\spot_l.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bodyshape.png" />
+    <Resource Include="Images\bootsEnabled.png" />
+    <Resource Include="Images\chestEnabled.png" />
+    <Resource Include="Images\helmetEnabled.png" />
+    <Resource Include="Images\weaponEnabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bootsDisabled.png" />
+    <Resource Include="Images\chestDisabled.png" />
+    <Resource Include="Images\helmetDisabled.png" />
+    <Resource Include="Images\weaponDisabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\shieldDisabled.png" />
+    <Resource Include="Images\shieldEnabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\armors.png" />
+    <Resource Include="Images\weapons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Mobs\barbarian.png" />
+    <Resource Include="Images\Mobs\boar.png" />
+    <Resource Include="Images\Mobs\golem.png" />
+    <Resource Include="Images\Mobs\hydra.png" />
+    <Resource Include="Images\Mobs\ogre.png" />
+    <Resource Include="Images\Mobs\spider.png" />
+    <Resource Include="Images\Mobs\strangecrab.png" />
+    <Resource Include="Images\Mobs\troll.png" />
+    <Resource Include="Images\Mobs\undead.png" />
+    <Resource Include="Images\Mobs\wolf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Items\default.png" />
+    <Resource Include="Images\Items\glowingAxe.png" />
+    <Resource Include="Images\Items\sword1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Items\helmet1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -92,7 +92,7 @@
                                 <Setter Property="Foreground" Value="#FFFFFF" />
                             </Trigger>
                             <Trigger Property="IsSelected" Value="False">
-                                <Setter TargetName="Border" Property="Background" Value="#88000000" />
+                                <Setter TargetName="Border" Property="Background" Value="#00000000" />
                                 <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
                                 <Setter Property="Foreground" Value="#FFFFFF" />
                             </Trigger>

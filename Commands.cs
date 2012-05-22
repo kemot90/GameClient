@@ -19,6 +19,12 @@ namespace Commands
         public const string GET_ENEMIES = "GET_ENEMIES";
         public const string GET_ITEMS_ARMORS = "GET_ITEMS_ARMORS";
         public const string GET_ITEMS_WEAPONS = "GET_ITEMS_WEAPONS";
+        public const string GET_SPOTS = "GET_SPOTS";
+        public const string GET_OWNSKILLS = "GET_OWNSKILLS";
+        public const string GET_CHARACTER_STORAGE = "GET_CHARACTER_STORAGE";
+        public const string GET_ITEM_BY_ID = "GET_ITEM_BY_ID";
+        public const string REMOVE_ONE_ITEM = "REMOVE_ONE_ITEM";
+        public const string ADD_ITEM = "ADD_ITEM";
     }
     public class ServerCmd
     {
@@ -32,6 +38,10 @@ namespace Commands
         public const string ENEMIES = "ENEMIES";
         public const string ARMORS = "ARMORS";
         public const string WEAPONS = "WEAPONS";
+        public const string SPOTS = "SPOTS";
+        public const string OWNSKILLS = "OWNSKILLS";
+        public const string CHARACTER_STORAGE = "CHARACTER_STORAGE";
+        public const string ITEM_BY_ID = "ITEM_BY_ID";
     }
     public class Command
     {
